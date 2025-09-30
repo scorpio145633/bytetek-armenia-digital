@@ -19,8 +19,8 @@ const Services = () => {
     },
     {
       icon: Palette,
-      title: t('services.design.title'),
-      description: t('services.design.description'),
+      title: t('services.uiux.title'),
+      description: t('services.uiux.description'),
     },
     {
       icon: Workflow,

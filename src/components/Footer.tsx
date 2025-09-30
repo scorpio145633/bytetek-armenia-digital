@@ -68,7 +68,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/services" className="text-white/70 hover:text-primary transition-colors">
-                  {t('services.design.title')}
+                  {t('services.uiux.title')}
                 </Link>
               </li>
               <li>
