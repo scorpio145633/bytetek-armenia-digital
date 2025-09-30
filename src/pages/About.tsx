@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Users, Target, Lightbulb, Award, ArrowRight, Calendar, MapPin, Heart } from 'lucide-react';
+import { Users, Target, Lightbulb, Award, ArrowRight, Calendar, MapPin, Heart, Globe2, TrendingUp, Briefcase, GraduationCap, Building2, Zap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
 import ParticleBackground from '@/components/ui/ParticleBackground';
 
@@ -18,9 +17,9 @@ const About = () => {
       gradient: "from-blue-500 to-purple-600"
     },
     {
-      icon: Target,
-      title: t('about.values.collaboration.title'),
-      description: t('about.values.collaboration.description'),
+      icon: Globe2,
+      title: t('about.values.global.title'),
+      description: t('about.values.global.description'),
       gradient: "from-green-500 to-teal-600"
     },
     {
@@ -39,71 +38,61 @@ const About = () => {
 
   const timeline = [
     {
-      year: "2019",
-      title: t('about.timeline.founded.title'),
-      description: t('about.timeline.founded.description'),
+      year: "2025 Q1",
+      title: t('about.timeline.q1.title'),
+      description: t('about.timeline.q1.description'),
       icon: Calendar
     },
     {
-      year: "2020",
-      title: t('about.timeline.expansion.title'),
-      description: t('about.timeline.expansion.description'),
+      year: "2025 Q2",
+      title: t('about.timeline.q2.title'),
+      description: t('about.timeline.q2.description'),
       icon: Users
     },
     {
-      year: "2022",
-      title: t('about.timeline.milestone.title'),
-      description: t('about.timeline.milestone.description'),
+      year: "2025 Q3",
+      title: t('about.timeline.q3.title'),
+      description: t('about.timeline.q3.description'),
       icon: Award
     },
     {
-      year: "2024",
-      title: t('about.timeline.present.title'),
-      description: t('about.timeline.present.description'),
+      year: "2025 Q4",
+      title: t('about.timeline.q4.title'),
+      description: t('about.timeline.q4.description'),
       icon: Target
     }
   ];
 
-  const team = [
+  const armeniaReasons = [
     {
-      name: "Armen Petrosyan",
-      role: t('about.team.ceo.role'),
-      bio: t('about.team.ceo.bio'),
-      image: "/api/placeholder/150/150",
-      social: {
-        linkedin: "#",
-        github: "#"
-      }
+      icon: GraduationCap,
+      title: t('about.armenia.talent.title'),
+      description: t('about.armenia.talent.description')
     },
     {
-      name: "Sona Hakobyan",
-      role: t('about.team.cto.role'),
-      bio: t('about.team.cto.bio'),
-      image: "/api/placeholder/150/150",
-      social: {
-        linkedin: "#",
-        github: "#"
-      }
+      icon: TrendingUp,
+      title: t('about.armenia.cost.title'),
+      description: t('about.armenia.cost.description')
     },
     {
-      name: "David Kocharyan",
-      role: t('about.team.lead.role'),
-      bio: t('about.team.lead.bio'),
-      image: "/api/placeholder/150/150",
-      social: {
-        linkedin: "#",
-        github: "#"
-      }
+      icon: MapPin,
+      title: t('about.armenia.location.title'),
+      description: t('about.armenia.location.description')
     },
     {
-      name: "Anna Grigoryan",
-      role: t('about.team.designer.role'),
-      bio: t('about.team.designer.bio'),
-      image: "/api/placeholder/150/150",
-      social: {
-        linkedin: "#",
-        github: "#"
-      }
+      icon: Building2,
+      title: t('about.armenia.government.title'),
+      description: t('about.armenia.government.description')
+    },
+    {
+      icon: Briefcase,
+      title: t('about.armenia.education.title'),
+      description: t('about.armenia.education.description')
+    },
+    {
+      icon: Globe2,
+      title: t('about.armenia.multilingual.title'),
+      description: t('about.armenia.multilingual.description')
     }
   ];
 
@@ -147,14 +136,18 @@ const About = () => {
                 <p>{t('about.story.paragraph2')}</p>
                 <p>{t('about.story.paragraph3')}</p>
               </div>
-              <div className="mt-8 flex items-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-primary" />
-                  <span>{t('about.location')}</span>
+                  <span className="font-medium">{t('about.location')}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-primary" />
-                  <span>{t('about.passion')}</span>
+                  <Users className="w-5 h-5 text-primary" />
+                  <span className="font-medium">{t('about.teamSize')}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Globe2 className="w-5 h-5 text-primary" />
+                  <span className="font-medium">{t('about.languages')}</span>
                 </div>
               </div>
             </motion.div>
@@ -168,9 +161,9 @@ const About = () => {
             >
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-8 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-6xl font-bold text-primary mb-4">5+</div>
-                  <div className="text-xl font-semibold mb-2">{t('about.stats.years')}</div>
-                  <div className="text-muted-foreground">{t('about.stats.experience')}</div>
+                  <div className="text-6xl font-bold text-primary mb-4">50+</div>
+                  <div className="text-xl font-semibold mb-2">{t('about.stats.employees')}</div>
+                  <div className="text-muted-foreground">{t('about.stats.worldwide')}</div>
                 </div>
               </div>
               
@@ -178,27 +171,70 @@ const About = () => {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 bg-card rounded-xl p-4 shadow-lg"
+                className="absolute -top-4 -right-4 bg-card rounded-xl p-4 shadow-lg border border-border"
               >
-                <div className="text-2xl font-bold text-primary">150+</div>
-                <div className="text-sm text-muted-foreground">{t('about.stats.projects')}</div>
+                <div className="text-2xl font-bold text-primary">5+</div>
+                <div className="text-sm text-muted-foreground">{t('about.stats.languages')}</div>
               </motion.div>
               
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-4 -left-4 bg-card rounded-xl p-4 shadow-lg"
+                className="absolute -bottom-4 -left-4 bg-card rounded-xl p-4 shadow-lg border border-border"
               >
-                <div className="text-2xl font-bold text-primary">98%</div>
-                <div className="text-sm text-muted-foreground">{t('about.stats.satisfaction')}</div>
+                <div className="text-2xl font-bold text-primary">2025</div>
+                <div className="text-sm text-muted-foreground">{t('about.stats.founded')}</div>
               </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
+      {/* Why Armenia Section */}
       <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4 gradient-text">
+              {t('about.armenia.title')}
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              {t('about.armenia.subtitle')}
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {armeniaReasons.map((reason, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                <Card className="card-elevated h-full hover:shadow-2xl transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                      <reason.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{reason.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -246,7 +282,7 @@ const About = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-20">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -263,7 +299,7 @@ const About = () => {
             </p>
           </motion.div>
 
-          <div className="relative">
+          <div className="relative max-w-4xl mx-auto">
             {/* Timeline line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary to-accent hidden md:block" />
 
@@ -280,7 +316,7 @@ const About = () => {
                   }`}
                 >
                   <div className="flex-1">
-                    <Card className="card-elevated">
+                    <Card className="card-elevated hover:shadow-xl transition-all duration-300">
                       <CardContent className="p-6">
                         <div className="flex items-center gap-4 mb-4">
                           <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center">
@@ -297,7 +333,7 @@ const About = () => {
                   </div>
 
                   {/* Timeline dot */}
-                  <div className="hidden md:block w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg" />
+                  <div className="hidden md:block w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10" />
                   
                   <div className="flex-1" />
                 </motion.div>
@@ -307,68 +343,58 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-20 bg-muted/30">
+      {/* Team Section */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4 gradient-text">
               {t('about.team.title')}
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               {t('about.team.subtitle')}
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group"
-              >
-                <Card className="card-elevated text-center overflow-hidden">
-                  <CardContent className="p-6">
-                    <Avatar className="w-24 h-24 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <AvatarImage src={member.image} alt={member.name} />
-                      <AvatarFallback>
-                        {member.name.split(' ').map(n => n[0]).join('')}
-                      </AvatarFallback>
-                    </Avatar>
-                    <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                    <p className="text-primary font-medium mb-3">{member.role}</p>
-                    <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
-                    
-                    <div className="flex justify-center gap-2">
-                      <Button size="sm" variant="outline" asChild>
-                        <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer">
-                          LinkedIn
-                        </a>
-                      </Button>
-                      <Button size="sm" variant="outline" asChild>
-                        <a href={member.social.github} target="_blank" rel="noopener noreferrer">
-                          GitHub
-                        </a>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-4xl mx-auto"
+          >
+            <Card className="card-elevated">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-8 text-center">
+                  <div>
+                    <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2">{t('about.team.culture.innovation.title')}</h3>
+                    <p className="text-muted-foreground">{t('about.team.culture.innovation.description')}</p>
+                  </div>
+                  <div>
+                    <Users className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2">{t('about.team.culture.collaboration.title')}</h3>
+                    <p className="text-muted-foreground">{t('about.team.culture.collaboration.description')}</p>
+                  </div>
+                  <div>
+                    <Target className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2">{t('about.team.culture.excellence.title')}</h3>
+                    <p className="text-muted-foreground">{t('about.team.culture.excellence.description')}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

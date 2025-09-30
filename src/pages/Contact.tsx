@@ -1,161 +1,86 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
+import { MapPin, Phone, Mail, Clock, MessageSquare, Zap } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import ParticleBackground from '@/components/ui/ParticleBackground';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import SuccessAnimation from '@/components/ui/SuccessAnimation';
-import { z } from 'zod';
-
-// Input validation schema
-const contactSchema = z.object({
-  name: z.string()
-    .trim()
-    .min(2, 'Name must be at least 2 characters')
-    .max(100, 'Name must be less than 100 characters')
-    .regex(/^[a-zA-Z\s'-]+$/, 'Name can only contain letters, spaces, hyphens and apostrophes'),
-  email: z.string()
-    .trim()
-    .email('Invalid email address')
-    .max(255, 'Email must be less than 255 characters'),
-  phone: z.string()
-    .trim()
-    .max(20, 'Phone number too long')
-    .regex(/^[+\d\s()-]*$/, 'Invalid phone number format')
-    .optional()
-    .or(z.literal('')),
-  company: z.string()
-    .trim()
-    .max(100, 'Company name too long')
-    .optional()
-    .or(z.literal('')),
-  subject: z.string()
-    .trim()
-    .max(200, 'Subject too long')
-    .optional()
-    .or(z.literal('')),
-  service: z.string()
-    .trim()
-    .max(100)
-    .optional()
-    .or(z.literal('')),
-  message: z.string()
-    .trim()
-    .min(10, 'Message must be at least 10 characters')
-    .max(2000, 'Message must be less than 2000 characters'),
-});
+import ParticleBackground from '@/components/ui/ParticleBackground';
 
 const Contact = () => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [searchParams] = useSearchParams();
+  const serviceParam = searchParams.get('service');
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    company: '',
-    subject: '',
+    service: serviceParam || '',
     message: '',
-    service: ''
   });
+  
+  const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validate input
-    try {
-      contactSchema.parse(formData);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return;
-      }
-    }
-
     setLoading(true);
-
-    // Simulate sending (no actual backend call)
-    setTimeout(() => {
-      setLoading(false);
-      setShowSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        subject: '',
-        message: '',
-        service: ''
-      });
-    }, 1000);
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    setLoading(false);
+    setShowSuccess(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Our Office',
-      details: [
-        'Teryan Street 105/1',
-        'Yerevan 0009, Armenia'
-      ],
-      gradient: "from-blue-500 to-purple-600"
+      title: t('contact.info.office.title'),
+      content: t('contact.info.office.address'),
+      subContent: t('contact.info.office.city')
     },
     {
       icon: Phone,
-      title: 'Phone Numbers',
-      details: [
-        "+374 10 555 777",
-        "+374 77 999 888"
-      ],
-      gradient: "from-green-500 to-teal-600"
+      title: t('contact.info.phone.title'),
+      content: t('contact.info.phone.main'),
+      subContent: t('contact.info.phone.support')
     },
     {
       icon: Mail,
-      title: 'Email Address',
-      details: [
-        "info@bytetech.am",
-        "hello@bytetech.am"
-      ],
-      gradient: "from-pink-500 to-rose-600"
+      title: t('contact.info.email.title'),
+      content: t('contact.info.email.general'),
+      subContent: t('contact.info.email.support')
     },
     {
       icon: Clock,
-      title: 'Business Hours',
-      details: [
-        'Mon - Fri: 9:00 AM - 6:00 PM',
-        'Sat - Sun: Closed'
-      ],
-      gradient: "from-yellow-500 to-orange-600"
+      title: t('contact.info.hours.title'),
+      content: t('contact.info.hours.weekdays'),
+      subContent: t('contact.info.hours.timezone')
     }
   ];
 
-  const services = [
-    t('services.webDev.title'),
-    t('services.uiux.title'), 
-    t('services.mobile.title'),
-    t('services.cloud.title'),
-    t('services.automation.title'),
-    t('services.consulting.title')
-  ];
+  if (showSuccess) {
+    return <SuccessAnimation onComplete={() => setShowSuccess(false)} />;
+  }
 
   return (
     <div className="min-h-screen pt-20">
-      <AnimatePresence>
-        {showSuccess && (
-          <SuccessAnimation onComplete={() => setShowSuccess(false)} />
-        )}
-      </AnimatePresence>
-      {/* Hero Section */}
       <section className="py-20 relative overflow-hidden animated-bg">
         <ParticleBackground />
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -163,238 +88,194 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-3xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text">
               {t('contact.hero.title')}
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground">
               {t('contact.hero.subtitle')}
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Info Cards */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="card-elevated h-full text-center">
-                  <CardContent className="p-6">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${info.gradient} p-4 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <info.icon className="w-8 h-8 text-white" />
+                <Card className="card-elevated h-full hover:shadow-xl transition-all duration-300">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <info.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-4">{info.title}</h3>
-                    {info.details.map((detail, i) => (
-                      <p key={i} className="text-muted-foreground text-sm mb-1">
-                        {detail}
-                      </p>
-                    ))}
+                    <h3 className="font-semibold mb-2">{info.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-1">{info.content}</p>
+                    <p className="text-sm text-muted-foreground">{info.subContent}</p>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
           </div>
 
-          {/* Main Contact Section */}
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
+          <div className="grid lg:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              className="lg:col-span-2"
             >
               <Card className="card-elevated">
-                <CardHeader>
-                  <CardTitle className="text-2xl gradient-text flex items-center gap-2">
-                    <MessageSquare className="w-6 h-6" />
+                <CardContent className="p-8">
+                  <h2 className="text-3xl font-bold mb-6 gradient-text">
                     {t('contact.form.title')}
-                  </CardTitle>
-                  <p className="text-muted-foreground">
-                    {t('contact.form.subtitle')}
-                  </p>
-                </CardHeader>
-                <CardContent>
+                  </h2>
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
                         <Label htmlFor="name">{t('contact.form.name')}</Label>
                         <Input
                           id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder={t('contact.form.namePlaceholder')}
+                          type="text"
                           required
+                          value={formData.name}
+                          onChange={(e) => handleChange('name', e.target.value)}
+                          className="mt-2"
+                          placeholder={t('contact.form.namePlaceholder')}
                         />
                       </div>
-                      <div className="space-y-2">
+                      <div>
                         <Label htmlFor="email">{t('contact.form.email')}</Label>
                         <Input
                           id="email"
-                          name="email"
                           type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder={t('contact.form.emailPlaceholder')}
                           required
+                          value={formData.email}
+                          onChange={(e) => handleChange('email', e.target.value)}
+                          className="mt-2"
+                          placeholder={t('contact.form.emailPlaceholder')}
                         />
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
                         <Label htmlFor="phone">{t('contact.form.phone')}</Label>
                         <Input
                           id="phone"
-                          name="phone"
+                          type="tel"
                           value={formData.phone}
-                          onChange={handleChange}
+                          onChange={(e) => handleChange('phone', e.target.value)}
+                          className="mt-2"
                           placeholder={t('contact.form.phonePlaceholder')}
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="company">{t('contact.form.company')}</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          placeholder={t('contact.form.companyPlaceholder')}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
+                      <div>
                         <Label htmlFor="service">{t('contact.form.service')}</Label>
-                        <select
-                          id="service"
-                          name="service"
+                        <Select
                           value={formData.service}
-                          onChange={handleChange}
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          onValueChange={(value) => handleChange('service', value)}
                         >
-                          <option value="">{t('contact.form.selectService')}</option>
-                          {services.map((service, i) => (
-                            <option key={i} value={service}>{service}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="subject">{t('contact.form.subject')}</Label>
-                        <Input
-                          id="subject"
-                          name="subject"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          placeholder={t('contact.form.subjectPlaceholder')}
-                        />
+                          <SelectTrigger className="mt-2">
+                            <SelectValue placeholder={t('contact.form.servicePlaceholder')} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="web">{t('contact.form.services.web')}</SelectItem>
+                            <SelectItem value="mobile">{t('contact.form.services.mobile')}</SelectItem>
+                            <SelectItem value="design">{t('contact.form.services.design')}</SelectItem>
+                            <SelectItem value="custom">{t('contact.form.services.custom')}</SelectItem>
+                            <SelectItem value="consulting">{t('contact.form.services.consulting')}</SelectItem>
+                            <SelectItem value="other">{t('contact.form.services.other')}</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div>
                       <Label htmlFor="message">{t('contact.form.message')}</Label>
                       <Textarea
                         id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder={t('contact.form.messagePlaceholder')}
-                        rows={6}
                         required
+                        rows={6}
+                        value={formData.message}
+                        onChange={(e) => handleChange('message', e.target.value)}
+                        className="mt-2"
+                        placeholder={t('contact.form.messagePlaceholder')}
                       />
                     </div>
 
                     <Button
                       type="submit"
-                      disabled={loading}
-                      className="w-full hover-glow group"
                       size="lg"
+                      disabled={loading}
+                      className="w-full"
                     >
-                      {loading ? (
-                        t('contact.form.sending')
-                      ) : (
-                        <>
-                          {t('contact.form.send')}
-                          <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
+                      {loading ? t('contact.form.sending') : t('contact.form.send')}
                     </Button>
                   </form>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Map & Additional Info */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-6"
             >
-              {/* Map */}
-              <Card className="card-elevated overflow-hidden">
-                <div className="aspect-square bg-muted flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">{t('contact.map.title')}</h3>
-                    <p className="text-muted-foreground">{t('contact.map.description')}</p>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Quick Response */}
-              <Card className="card-glass">
+              <Card className="card-elevated">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4 gradient-text">
-                    {t('contact.response.title')}
-                  </h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full" />
-                      <span className="text-sm">{t('contact.response.time1')}</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full" />
-                      <span className="text-sm">{t('contact.response.time2')}</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full" />
-                      <span className="text-sm">{t('contact.response.time3')}</span>
-                    </li>
-                  </ul>
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                    <MessageSquare className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{t('contact.quickResponse.title')}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {t('contact.quickResponse.description')}
+                  </p>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>{t('contact.quickResponse.multilingual')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>{t('contact.quickResponse.support247')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>{t('contact.quickResponse.response24h')}</span>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              {/* Emergency Contact */}
-              <Card className="card-glass border-primary/20">
+              <Card className="card-elevated bg-gradient-to-br from-primary/10 to-accent/10">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-primary">
-                    {t('contact.emergency.title')}
-                  </h3>
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{t('contact.emergency.title')}</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     {t('contact.emergency.description')}
                   </p>
                   <div className="space-y-2">
-                     <div className="flex items-center gap-2">
-                      <Phone className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium">+374 77 247 247</span>
+                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
+                      <span className="text-sm font-medium">{t('contact.emergency.phone')}</span>
+                      <span className="text-sm font-bold text-primary">+374 XX XXX XXX</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium">urgent@bytetech.am</span>
+                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
+                      <span className="text-sm font-medium">{t('contact.emergency.email')}</span>
+                      <span className="text-sm font-bold text-primary">urgent@bytetech.am</span>
                     </div>
                   </div>
                 </CardContent>
