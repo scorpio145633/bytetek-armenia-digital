@@ -121,6 +121,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_rate_limit: {
+        Args: {
+          _endpoint: string
+          _ip_address: string
+          _max_attempts?: number
+          _window_minutes?: number
+        }
+        Returns: boolean
+      }
       cleanup_old_rate_limits: {
         Args: Record<PropertyKey, never>
         Returns: undefined

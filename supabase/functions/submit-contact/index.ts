@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
-import { corsHeaders } from '../_shared/cors.ts';
+import { getCorsHeaders } from '../_shared/cors.ts';
 
 const supabase = createClient(
   Deno.env.get('SUPABASE_URL') ?? '',
@@ -21,7 +21,7 @@ interface ContactFormData {
 function validateInput(data: ContactFormData): { valid: boolean; error?: string } {
   // Check honeypot (should be empty)
   if (data.honeypot && data.honeypot.trim() !== '') {
-    console.log('Honeypot triggered:', data.email);
+    console.log('Honeypot triggered');
     return { valid: false, error: 'Invalid submission' };
   }
 
@@ -53,62 +53,12 @@ function validateInput(data: ContactFormData): { valid: boolean; error?: string 
   return { valid: true };
 }
 
-async function checkRateLimit(ip: string): Promise<{ allowed: boolean; retryAfter?: number }> {
-  const endpoint = 'submit-contact';
-  const windowSize = 60 * 60; // 1 hour in seconds
-  const maxAttempts = 5;
-  
-  const windowStart = new Date(Date.now() - windowSize * 1000);
-
-  // Check existing rate limit
-  const { data: existing, error: selectError } = await supabase
-    .from('rate_limits')
-    .select('*')
-    .eq('ip_address', ip)
-    .eq('endpoint', endpoint)
-    .gte('window_start', windowStart.toISOString())
-    .order('window_start', { ascending: false })
-    .limit(1);
-
-  if (selectError) {
-    console.error('Rate limit check error:', selectError);
-    return { allowed: true }; // Fail open to avoid blocking legitimate users
-  }
-
-  if (existing && existing.length > 0) {
-    const record = existing[0];
-    
-    if (record.attempt_count >= maxAttempts) {
-      const windowEnd = new Date(new Date(record.window_start).getTime() + windowSize * 1000);
-      const retryAfter = Math.ceil((windowEnd.getTime() - Date.now()) / 1000);
-      
-      console.log(`Rate limit exceeded for IP ${ip}: ${record.attempt_count} attempts`);
-      return { allowed: false, retryAfter };
-    }
-
-    // Increment attempt count
-    await supabase
-      .from('rate_limits')
-      .update({ attempt_count: record.attempt_count + 1 })
-      .eq('id', record.id);
-
-    return { allowed: true };
-  }
-
-  // Create new rate limit record
-  await supabase
-    .from('rate_limits')
-    .insert({
-      ip_address: ip,
-      endpoint,
-      attempt_count: 1,
-      window_start: new Date().toISOString(),
-    });
-
-  return { allowed: true };
-}
+// Rate limiting is now handled by secure database function check_rate_limit()
 
 Deno.serve(async (req) => {
+  const origin = req.headers.get('origin');
+  const corsHeaders = getCorsHeaders(origin);
+  
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -120,15 +70,23 @@ Deno.serve(async (req) => {
                req.headers.get('x-real-ip') || 
                'unknown';
 
-    console.log('Contact form submission from IP:', ip);
+    console.log('Contact form submission received');
 
-    // Check rate limit
-    const rateLimitCheck = await checkRateLimit(ip);
-    if (!rateLimitCheck.allowed) {
+    // Check rate limit using secure database function
+    const { data: rateLimitPassed, error: rateLimitError } = await supabase
+      .rpc('check_rate_limit', {
+        _ip_address: ip,
+        _endpoint: 'submit-contact',
+        _max_attempts: 5,
+        _window_minutes: 60
+      });
+
+    if (rateLimitError || !rateLimitPassed) {
+      console.error('Rate limit check failed or exceeded');
       return new Response(
         JSON.stringify({ 
           error: 'Too many submissions. Please try again later.',
-          retryAfter: rateLimitCheck.retryAfter 
+          code: 'RATE_LIMIT_EXCEEDED'
         }),
         { 
           status: 429, 
@@ -182,7 +140,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    console.log('Contact message submitted successfully from:', data.email);
+    console.log('Contact message submitted successfully');
 
     return new Response(
       JSON.stringify({ success: true, message: 'Message submitted successfully' }),

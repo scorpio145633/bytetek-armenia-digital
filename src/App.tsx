@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import AdminLogin from "./pages/AdminLogin";
 import AdminMessages from "./pages/AdminMessages";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import NotFound from "./pages/NotFound";
 import SmoothScroll from "./components/ui/SmoothScroll";
@@ -38,7 +39,11 @@ const App = () => {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/cookies-policy" element={<CookiesPolicy />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/messages" element={<AdminMessages />} />
+                <Route path="/admin/messages" element={
+                  <ProtectedRoute requireAdmin={true}>
+                    <AdminMessages />
+                  </ProtectedRoute>
+                } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
