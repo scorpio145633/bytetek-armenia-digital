@@ -53,11 +53,27 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-white">
               {t('nav.services')}
             </h3>
-            <ul className="space-y-2 text-white/70">
-              <li>{t('services.customDev.title')}</li>
-              <li>{t('services.webDev.title')}</li>
-              <li>{t('services.design.title')}</li>
-              <li>{t('services.workflow.title')}</li>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/services" className="text-white/70 hover:text-primary transition-colors">
+                  {t('services.customDev.title')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="text-white/70 hover:text-primary transition-colors">
+                  {t('services.webDev.title')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="text-white/70 hover:text-primary transition-colors">
+                  {t('services.design.title')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="text-white/70 hover:text-primary transition-colors">
+                  {t('services.workflow.title')}
+                </Link>
+              </li>
             </ul>
           </div>
 

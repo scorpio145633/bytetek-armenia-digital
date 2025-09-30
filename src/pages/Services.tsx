@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
-import { Code, Palette, Smartphone, Cloud, Zap, Shield, ArrowRight, CheckCircle } from 'lucide-react';
+import { Code, Palette, Smartphone, Cloud, Zap, Shield, ArrowRight, CheckCircle, Database, ShoppingCart, Plug, Lock, Headphones, Rocket, Globe } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -8,104 +7,198 @@ import { Link } from 'react-router-dom';
 import ParticleBackground from '@/components/ui/ParticleBackground';
 
 const Services = () => {
-  const { t } = useTranslation();
-
   const services = [
     {
       icon: Code,
-      title: t('services.webDev.title'),
-      description: t('services.webDev.description'),
-      longDescription: t('services.webDev.longDescription'),
+      title: 'Custom Software Development',
+      description: 'Tailored software solutions designed to meet your unique business needs',
+      longDescription: 'We create bespoke software applications from the ground up, perfectly aligned with your business processes and objectives. Our team ensures scalable, maintainable, and future-proof solutions.',
       features: [
-        t('services.webDev.feature1'),
-        t('services.webDev.feature2'),
-        t('services.webDev.feature3'),
-        t('services.webDev.feature4'),
-        t('services.webDev.feature5')
+        'Full-stack custom application development',
+        'Enterprise software solutions',
+        'Legacy system modernization',
+        'Scalable architecture design',
+        'Continuous support and maintenance'
       ],
-      technologies: ['React', 'Vue.js', 'Node.js', 'TypeScript', 'Next.js'],
-      price: t('services.webDev.price'),
-      gradient: "from-blue-500 to-purple-600"
+      technologies: ['React', 'Node.js', 'Python', '.NET', 'Java', 'TypeScript'],
+      price: '$15,000+',
+      gradient: "from-blue-500 to-cyan-600"
+    },
+    {
+      icon: Globe,
+      title: 'Web Development',
+      description: 'Modern, responsive websites and web applications',
+      longDescription: 'Build stunning, high-performance websites and web applications that drive results. From corporate websites to complex web platforms, we deliver exceptional digital experiences.',
+      features: [
+        'Responsive web design',
+        'Progressive Web Apps (PWA)',
+        'E-commerce platforms',
+        'Content Management Systems',
+        'SEO optimization'
+      ],
+      technologies: ['React', 'Vue.js', 'Next.js', 'WordPress', 'Shopify'],
+      price: '$5,000+',
+      gradient: "from-purple-500 to-pink-600"
     },
     {
       icon: Palette,
-      title: t('services.uiux.title'),
-      description: t('services.uiux.description'),
-      longDescription: t('services.uiux.longDescription'),
+      title: 'UI/UX Design',
+      description: 'Beautiful, intuitive interfaces that users love',
+      longDescription: 'Create exceptional user experiences with our design services. We combine aesthetics with functionality to deliver interfaces that engage users and drive conversions.',
       features: [
-        t('services.uiux.feature1'),
-        t('services.uiux.feature2'),
-        t('services.uiux.feature3'),
-        t('services.uiux.feature4'),
-        t('services.uiux.feature5')
+        'User research and persona development',
+        'Wireframing and prototyping',
+        'Visual design and branding',
+        'Usability testing',
+        'Design system creation'
       ],
-      technologies: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping', 'User Research'],
-      price: t('services.uiux.price'),
+      technologies: ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Principle'],
+      price: '$3,000+',
       gradient: "from-pink-500 to-rose-600"
     },
     {
       icon: Smartphone,
-      title: t('services.mobile.title'),
-      description: t('services.mobile.description'),
-      longDescription: t('services.mobile.longDescription'),
+      title: 'Mobile App Development',
+      description: 'Native and cross-platform mobile applications',
+      longDescription: 'Develop powerful mobile apps for iOS and Android. Whether native or cross-platform, we build apps that users love with seamless performance and intuitive interfaces.',
       features: [
-        t('services.mobile.feature1'),
-        t('services.mobile.feature2'),
-        t('services.mobile.feature3'),
-        t('services.mobile.feature4'),
-        t('services.mobile.feature5')
+        'iOS and Android development',
+        'Cross-platform solutions',
+        'App Store optimization',
+        'Push notifications & analytics',
+        'In-app purchases integration'
       ],
-      technologies: ['React Native', 'Flutter', 'iOS', 'Android', 'App Store'],
-      price: t('services.mobile.price'),
-      gradient: "from-green-500 to-teal-600"
+      technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
+      price: '$10,000+',
+      gradient: "from-green-500 to-emerald-600"
+    },
+    {
+      icon: ShoppingCart,
+      title: 'E-commerce Solutions',
+      description: 'Complete online stores that drive sales',
+      longDescription: 'Launch and grow your online business with our e-commerce solutions. From product catalogs to secure payments, we build everything you need to sell online successfully.',
+      features: [
+        'Custom e-commerce platforms',
+        'Payment gateway integration',
+        'Inventory management systems',
+        'Shopping cart optimization',
+        'Multi-vendor marketplace development'
+      ],
+      technologies: ['Shopify', 'WooCommerce', 'Magento', 'Stripe', 'PayPal'],
+      price: '$8,000+',
+      gradient: "from-orange-500 to-red-600"
     },
     {
       icon: Cloud,
-      title: t('services.cloud.title'),
-      description: t('services.cloud.description'),
-      longDescription: t('services.cloud.longDescription'),
+      title: 'Cloud Services & DevOps',
+      description: 'Scalable cloud infrastructure and automation',
+      longDescription: 'Migrate to the cloud and optimize your infrastructure. Our DevOps expertise ensures reliable, scalable, and cost-effective cloud solutions with automated deployment pipelines.',
       features: [
-        t('services.cloud.feature1'),
-        t('services.cloud.feature2'),
-        t('services.cloud.feature3'),
-        t('services.cloud.feature4'),
-        t('services.cloud.feature5')
+        'Cloud migration and strategy',
+        'CI/CD pipeline setup',
+        'Container orchestration',
+        'Infrastructure as Code',
+        'Monitoring and logging'
       ],
-      technologies: ['AWS', 'Google Cloud', 'Docker', 'Kubernetes', 'DevOps'],
-      price: t('services.cloud.price'),
-      gradient: "from-yellow-500 to-orange-600"
+      technologies: ['AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes'],
+      price: '$7,000+',
+      gradient: "from-blue-600 to-indigo-600"
+    },
+    {
+      icon: Plug,
+      title: 'API Development & Integration',
+      description: 'Seamless system integration and API solutions',
+      longDescription: 'Connect your systems and enable data flow with robust APIs. We design, develop, and integrate APIs that power your digital ecosystem and enhance functionality.',
+      features: [
+        'RESTful API development',
+        'GraphQL implementation',
+        'Third-party API integration',
+        'API documentation',
+        'Microservices architecture'
+      ],
+      technologies: ['Node.js', 'Express', 'GraphQL', 'REST', 'Postman'],
+      price: '$4,000+',
+      gradient: "from-teal-500 to-cyan-600"
+    },
+    {
+      icon: Database,
+      title: 'Database Management',
+      description: 'Robust database design and optimization',
+      longDescription: 'Design, implement, and maintain efficient databases that power your applications. From schema design to performance tuning, we ensure your data is secure and accessible.',
+      features: [
+        'Database design and modeling',
+        'Query optimization',
+        'Data migration services',
+        'Backup and recovery solutions',
+        'Database security'
+      ],
+      technologies: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Elasticsearch'],
+      price: '$3,500+',
+      gradient: "from-violet-500 to-purple-600"
+    },
+    {
+      icon: Lock,
+      title: 'Cybersecurity Solutions',
+      description: 'Protect your business from digital threats',
+      longDescription: 'Secure your digital assets with comprehensive cybersecurity solutions. We implement industry best practices to protect your data, applications, and infrastructure.',
+      features: [
+        'Security audits and assessments',
+        'Penetration testing',
+        'Encryption implementation',
+        'Compliance consulting',
+        'Incident response planning'
+      ],
+      technologies: ['OWASP', 'SSL/TLS', 'OAuth', 'JWT', 'Firewall'],
+      price: '$5,000+',
+      gradient: "from-red-500 to-rose-600"
     },
     {
       icon: Zap,
-      title: t('services.automation.title'),
-      description: t('services.automation.description'),
-      longDescription: t('services.automation.longDescription'),
+      title: 'Business Automation',
+      description: 'Streamline operations with intelligent automation',
+      longDescription: 'Automate repetitive tasks and optimize workflows. We help businesses save time and reduce costs through smart automation solutions and process optimization.',
       features: [
-        t('services.automation.feature1'),
-        t('services.automation.feature2'),
-        t('services.automation.feature3'),
-        t('services.automation.feature4'),
-        t('services.automation.feature5')
+        'Workflow automation',
+        'Process optimization',
+        'RPA implementation',
+        'Integration automation',
+        'Custom automation tools'
       ],
-      technologies: ['Zapier', 'Python', 'APIs', 'Workflow', 'Integration'],
-      price: t('services.automation.price'),
-      gradient: "from-purple-500 to-indigo-600"
+      technologies: ['Zapier', 'Make', 'Python', 'n8n', 'Power Automate'],
+      price: '$4,500+',
+      gradient: "from-yellow-500 to-orange-600"
     },
     {
-      icon: Shield,
-      title: t('services.consulting.title'),
-      description: t('services.consulting.description'),
-      longDescription: t('services.consulting.longDescription'),
+      icon: Headphones,
+      title: 'IT Support & Maintenance',
+      description: '24/7 technical support and system maintenance',
+      longDescription: 'Keep your systems running smoothly with our comprehensive IT support services. From troubleshooting to regular maintenance, we ensure optimal performance.',
       features: [
-        t('services.consulting.feature1'),
-        t('services.consulting.feature2'),
-        t('services.consulting.feature3'),
-        t('services.consulting.feature4'),
-        t('services.consulting.feature5')
+        '24/7 technical support',
+        'System monitoring',
+        'Regular updates and patches',
+        'Performance optimization',
+        'Documentation and training'
       ],
-      technologies: ['Strategy', 'Architecture', 'Security', 'Performance', 'Scalability'],
-      price: t('services.consulting.price'),
-      gradient: "from-gray-500 to-gray-700"
+      technologies: ['Help Desk', 'Monitoring Tools', 'Ticketing Systems', 'Remote Support', 'Documentation'],
+      price: '$2,000/month',
+      gradient: "from-indigo-500 to-blue-600"
+    },
+    {
+      icon: Rocket,
+      title: 'Digital Transformation',
+      description: 'Modernize your business for the digital age',
+      longDescription: 'Transform your business with cutting-edge digital solutions. We help organizations leverage technology to improve efficiency, reach new markets, and stay competitive.',
+      features: [
+        'Digital strategy consulting',
+        'Technology roadmap planning',
+        'Change management',
+        'Digital marketing integration',
+        'Innovation workshops'
+      ],
+      technologies: ['Strategy', 'Agile', 'Analytics', 'AI/ML', 'IoT'],
+      price: '$10,000+',
+      gradient: "from-emerald-500 to-teal-600"
     }
   ];
 
@@ -122,14 +215,14 @@ const Services = () => {
             className="max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text">
-              {t('services.hero.title')}
+              Our IT Services
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              {t('services.hero.subtitle')}
+              Comprehensive technology solutions to transform your business and drive growth
             </p>
             <Button asChild size="lg" className="hover-glow">
               <Link to="/contact">
-                {t('services.hero.cta')}
+                Get Started
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -140,7 +233,7 @@ const Services = () => {
       {/* Services Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-12">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -171,7 +264,7 @@ const Services = () => {
 
                     {/* Features */}
                     <div>
-                      <h4 className="font-semibold mb-3">{t('services.features')}</h4>
+                      <h4 className="font-semibold mb-3">Key Features</h4>
                       <ul className="space-y-2">
                         {service.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-start gap-3 text-sm">
@@ -184,7 +277,7 @@ const Services = () => {
 
                     {/* Technologies */}
                     <div>
-                      <h4 className="font-semibold mb-3">{t('services.technologies')}</h4>
+                      <h4 className="font-semibold mb-3">Technologies</h4>
                       <div className="flex flex-wrap gap-2">
                         {service.technologies.map((tech, techIndex) => (
                           <Badge key={techIndex} variant="secondary" className="text-xs">
@@ -198,12 +291,12 @@ const Services = () => {
                     <div className="pt-4 border-t border-border">
                       <div className="flex items-center justify-between">
                         <div>
-                          <span className="text-sm text-muted-foreground">{t('services.startingAt')}</span>
+                          <span className="text-sm text-muted-foreground">Starting at</span>
                           <div className="text-2xl font-bold text-primary">{service.price}</div>
                         </div>
                         <Button asChild className="group">
                           <Link to="/contact">
-                            {t('services.getQuote')}
+                            Get Quote
                             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </Link>
                         </Button>
@@ -228,10 +321,10 @@ const Services = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-4 gradient-text">
-              {t('services.process.title')}
+              Our Process
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t('services.process.subtitle')}
+              A proven methodology to deliver exceptional results
             </p>
           </motion.div>
 
@@ -239,23 +332,23 @@ const Services = () => {
             {[
               {
                 step: "01",
-                title: t('services.process.step1.title'),
-                description: t('services.process.step1.description')
+                title: "Discovery",
+                description: "We analyze your needs and define project scope"
               },
               {
                 step: "02",
-                title: t('services.process.step2.title'),
-                description: t('services.process.step2.description')
+                title: "Planning",
+                description: "Create detailed roadmap and technical specifications"
               },
               {
                 step: "03",
-                title: t('services.process.step3.title'),
-                description: t('services.process.step3.description')
+                title: "Development",
+                description: "Build and test your solution with agile methodology"
               },
               {
                 step: "04",
-                title: t('services.process.step4.title'),
-                description: t('services.process.step4.description')
+                title: "Deployment",
+                description: "Launch and provide ongoing support"
               }
             ].map((step, index) => (
               <motion.div
@@ -288,21 +381,21 @@ const Services = () => {
             className="max-w-3xl mx-auto"
           >
             <h2 className="text-4xl font-bold mb-6 gradient-text">
-              {t('services.cta.title')}
+              Ready to Start Your Project?
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              {t('services.cta.subtitle')}
+              Let's discuss how we can help transform your business with technology
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="hover-glow">
                 <Link to="/contact">
-                  {t('services.cta.primary')}
+                  Contact Us
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="/portfolio">
-                  {t('services.cta.secondary')}
+                  View Our Work
                 </Link>
               </Button>
             </div>
