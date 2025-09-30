@@ -153,18 +153,23 @@ All colors MUST be HSL.
 
   /* Hover Effects */
   .hover-lift {
-    transition: var(--transition-smooth);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .hover-lift:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-elevation);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
   }
 
   .hover-glow {
-    transition: var(--transition-smooth);
+    transition: all 0.3s ease;
   }
   .hover-glow:hover {
-    box-shadow: var(--shadow-glow);
+    box-shadow: 0 0 30px rgba(245, 184, 0, 0.4);
+  }
+  
+  /* Modern gradient background */
+  .gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(0 0% 6%) 50%, hsl(var(--background)) 100%);
   }
 
   /* Card Variants */
