@@ -202,9 +202,10 @@ const Portfolio = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ y: -12 }}
                 className="group"
               >
-                <Card className="overflow-hidden card-elevated h-full">
+                <Card className="overflow-hidden card-elevated h-full hover:shadow-2xl transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}

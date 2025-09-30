@@ -8,6 +8,10 @@ import { Link } from 'react-router-dom';
 import HeroSection from '@/components/home/HeroSection';
 import StatsSection from '@/components/home/StatsSection';
 import FeaturedServices from '@/components/home/FeaturedServices';
+import teamCollaboration from '@/assets/team-collaboration.jpg';
+import developerCoding from '@/assets/developer-coding.jpg';
+import designersWorking from '@/assets/designers-working.jpg';
+import teamMeeting from '@/assets/team-meeting.jpg';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -49,6 +53,79 @@ const Home = () => {
 
       {/* Featured Services */}
       <FeaturedServices />
+
+      {/* Team in Action Section */}
+      <section className="section-spacing bg-muted/20 relative overflow-hidden">
+        <div className="container-wide">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-heading-lg mb-6">
+              Our Team in Action
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Meet the talented professionals behind your digital success
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              { img: teamCollaboration, title: 'Collaborative Development', delay: 0 },
+              { img: developerCoding, title: 'Expert Coding', delay: 0.1 },
+              { img: designersWorking, title: 'Creative Design', delay: 0.2 },
+              { img: teamMeeting, title: 'Strategic Planning', delay: 0.3 }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: item.delay }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl"
+              >
+                <div className="relative h-80 overflow-hidden rounded-2xl">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: item.delay + 0.2 }}
+                    className="absolute bottom-0 left-0 right-0 p-6"
+                  >
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {item.title}
+                    </h3>
+                    <div className="w-16 h-1 bg-primary rounded-full" />
+                  </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Floating decoration */}
+        <motion.div
+          className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </section>
 
       {/* Features Section - Modern Cards with Animations */}
       <section className="section-spacing relative">

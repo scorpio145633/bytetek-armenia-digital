@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,9 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
 import ParticleBackground from '@/components/ui/ParticleBackground';
+import SuccessAnimation from '@/components/ui/SuccessAnimation';
 import { z } from 'zod';
 
 // Input validation schema
@@ -52,9 +51,8 @@ const contactSchema = z.object({
 
 const Contact = () => {
   const { t } = useTranslation();
-  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [lastSubmit, setLastSubmit] = useState<number>(0);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -68,74 +66,21 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Rate limiting check (60 second cooldown)
-    const now = Date.now();
-    const timeSinceLastSubmit = now - lastSubmit;
-    if (timeSinceLastSubmit < 60000) {
-      const waitTime = Math.ceil((60000 - timeSinceLastSubmit) / 1000);
-      toast({
-        title: 'Please wait',
-        description: `Please wait ${waitTime} seconds before submitting again`,
-        variant: 'destructive',
-      });
-      return;
-    }
-
     // Validate input
     try {
       contactSchema.parse(formData);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        toast({
-          title: 'Validation Error',
-          description: error.errors[0].message,
-          variant: 'destructive',
-        });
         return;
       }
     }
 
     setLoading(true);
 
-    try {
-      const { data, error } = await supabase.functions.invoke('submit-contact', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          subject: formData.subject,
-          service: formData.service,
-          message: formData.message,
-          honeypot: '', // Honeypot field (always empty for legitimate users)
-        },
-      });
-
-      if (error) throw error;
-
-      if (data?.error) {
-        // Handle rate limiting
-        if (data.retryAfter) {
-          toast({
-            title: 'Too many submissions',
-            description: `Please try again in ${Math.ceil(data.retryAfter / 60)} minutes.`,
-            variant: 'destructive',
-          });
-        } else {
-          toast({
-            title: 'Error',
-            description: data.error,
-            variant: 'destructive',
-          });
-        }
-        return;
-      }
-
-      toast({
-        title: t('contact.form.success.title'),
-        description: t('contact.form.success.description'),
-      });
-
+    // Simulate sending (no actual backend call)
+    setTimeout(() => {
+      setLoading(false);
+      setShowSuccess(true);
       setFormData({
         name: '',
         email: '',
@@ -145,17 +90,7 @@ const Contact = () => {
         message: '',
         service: ''
       });
-      setLastSubmit(now);
-    } catch (error) {
-      // Generic error message to avoid information disclosure
-      toast({
-        title: t('contact.form.error.title'),
-        description: t('contact.form.error.description'),
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -168,37 +103,37 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: MapPin,
-      title: t('contact.info.address.title'),
+      title: 'Our Office',
       details: [
-        t('contact.info.address.line1'),
-        t('contact.info.address.line2')
+        'Teryan Street 105/1',
+        'Yerevan 0009, Armenia'
       ],
       gradient: "from-blue-500 to-purple-600"
     },
     {
       icon: Phone,
-      title: t('contact.info.phone.title'),
+      title: 'Phone Numbers',
       details: [
-        "+374 10 123 456",
-        "+374 77 123 456"
+        "+374 10 555 777",
+        "+374 77 999 888"
       ],
       gradient: "from-green-500 to-teal-600"
     },
     {
       icon: Mail,
-      title: t('contact.info.email.title'),
+      title: 'Email Address',
       details: [
-        "hello@bytetech.am",
-        "projects@bytetech.am"
+        "info@bytetech.am",
+        "hello@bytetech.am"
       ],
       gradient: "from-pink-500 to-rose-600"
     },
     {
       icon: Clock,
-      title: t('contact.info.hours.title'),
+      title: 'Business Hours',
       details: [
-        t('contact.info.hours.weekdays'),
-        t('contact.info.hours.weekend')
+        'Mon - Fri: 9:00 AM - 6:00 PM',
+        'Sat - Sun: Closed'
       ],
       gradient: "from-yellow-500 to-orange-600"
     }
@@ -215,6 +150,11 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-20">
+      <AnimatePresence>
+        {showSuccess && (
+          <SuccessAnimation onComplete={() => setShowSuccess(false)} />
+        )}
+      </AnimatePresence>
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden animated-bg">
         <ParticleBackground />
@@ -448,9 +388,9 @@ const Contact = () => {
                     {t('contact.emergency.description')}
                   </p>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2">
+                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium">+374 77 24/7 HELP</span>
+                      <span className="text-sm font-medium">+374 77 247 247</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-primary" />

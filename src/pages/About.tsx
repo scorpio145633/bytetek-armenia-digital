@@ -223,13 +223,18 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ y: -8, scale: 1.05 }}
                 className="group"
               >
-                <Card className="card-elevated h-full text-center">
+                <Card className="card-elevated h-full text-center hover:shadow-2xl transition-all duration-300">
                   <CardContent className="p-6">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${value.gradient} p-4 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <motion.div 
+                      className={`w-16 h-16 rounded-xl bg-gradient-to-br ${value.gradient} p-4 mx-auto mb-6`}
+                      whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    >
                       <value.icon className="w-8 h-8 text-white" />
-                    </div>
+                    </motion.div>
                     <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
                     <p className="text-muted-foreground text-sm">{value.description}</p>
                   </CardContent>

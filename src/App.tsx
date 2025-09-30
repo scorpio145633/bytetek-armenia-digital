@@ -16,6 +16,7 @@ import AdminMessages from "./pages/AdminMessages";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import NotFound from "./pages/NotFound";
+import SmoothScroll from "./components/ui/SmoothScroll";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <SmoothScroll />
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">

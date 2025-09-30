@@ -241,13 +241,18 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ y: -12, scale: 1.02 }}
                 className="group"
               >
-                <Card className="h-full card-elevated overflow-hidden">
+                <Card className="h-full card-elevated overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <CardHeader className="relative">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.gradient} p-4 mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <motion.div 
+                      className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.gradient} p-4 mb-4`}
+                      whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    >
                       <service.icon className="w-8 h-8 text-white" />
-                    </div>
+                    </motion.div>
                     <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
                       {service.title}
                     </CardTitle>

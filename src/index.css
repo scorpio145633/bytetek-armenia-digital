@@ -217,6 +217,40 @@ All colors MUST be HSL.
   .pulse-glow {
     animation: pulse-glow 2s infinite;
   }
+
+  /* Smooth Animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .text-animation {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(45 90% 40%),
+      hsl(var(--primary))
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: text-shimmer 3s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
@@ -245,6 +279,15 @@ All colors MUST be HSL.
 
 /* Keyframe Animations */
 @keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes text-shimmer {
   0%, 100% {
     background-position: 0% 50%;
   }
