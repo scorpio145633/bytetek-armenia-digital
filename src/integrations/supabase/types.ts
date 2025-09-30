@@ -16,31 +16,103 @@ export type Database = {
     Tables: {
       contact_messages: {
         Row: {
+          company: string | null
           created_at: string
           email: string
+          handled_by: string | null
           id: string
           ip_address: string | null
           message: string
           name: string
+          phone: string | null
+          response_notes: string | null
+          service: string | null
+          status: string | null
+          subject: string | null
+          updated_at: string | null
           user_agent: string | null
         }
         Insert: {
+          company?: string | null
           created_at?: string
           email: string
+          handled_by?: string | null
           id?: string
           ip_address?: string | null
           message: string
           name: string
+          phone?: string | null
+          response_notes?: string | null
+          service?: string | null
+          status?: string | null
+          subject?: string | null
+          updated_at?: string | null
           user_agent?: string | null
         }
         Update: {
+          company?: string | null
           created_at?: string
           email?: string
+          handled_by?: string | null
           id?: string
           ip_address?: string | null
           message?: string
           name?: string
+          phone?: string | null
+          response_notes?: string | null
+          service?: string | null
+          status?: string | null
+          subject?: string | null
+          updated_at?: string | null
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      rate_limits: {
+        Row: {
+          attempt_count: number
+          created_at: string
+          endpoint: string
+          id: string
+          ip_address: string
+          window_start: string
+        }
+        Insert: {
+          attempt_count?: number
+          created_at?: string
+          endpoint: string
+          id?: string
+          ip_address: string
+          window_start?: string
+        }
+        Update: {
+          attempt_count?: number
+          created_at?: string
+          endpoint?: string
+          id?: string
+          ip_address?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
@@ -49,10 +121,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      cleanup_old_rate_limits: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -179,6 +258,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const

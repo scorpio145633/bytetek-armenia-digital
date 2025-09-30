@@ -98,21 +98,38 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const sanitizedMessage = `Phone: ${formData.phone.trim()}\nCompany: ${formData.company.trim()}\nSubject: ${formData.subject.trim()}\nService: ${formData.service.trim()}\n\nMessage:\n${formData.message.trim()}`;
-      
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([
-          {
-            name: formData.name.trim(),
-            email: formData.email.trim().toLowerCase(),
-            message: sanitizedMessage,
-            ip_address: null, // Client-side cannot reliably get IP
-            user_agent: navigator.userAgent,
-          }
-        ]);
+      const { data, error } = await supabase.functions.invoke('submit-contact', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          subject: formData.subject,
+          service: formData.service,
+          message: formData.message,
+          honeypot: '', // Honeypot field (always empty for legitimate users)
+        },
+      });
 
       if (error) throw error;
+
+      if (data?.error) {
+        // Handle rate limiting
+        if (data.retryAfter) {
+          toast({
+            title: 'Too many submissions',
+            description: `Please try again in ${Math.ceil(data.retryAfter / 60)} minutes.`,
+            variant: 'destructive',
+          });
+        } else {
+          toast({
+            title: 'Error',
+            description: data.error,
+            variant: 'destructive',
+          });
+        }
+        return;
+      }
 
       toast({
         title: t('contact.form.success.title'),
