@@ -34,10 +34,17 @@ const resources = {
           viewAll: 'View All Services'
         },
         stats: {
+          welcomeTitle: 'Join Our Global Family',
+          welcomeSubtitle: 'Trusted by clients worldwide, delivering excellence in every project',
           projects: 'Projects Completed',
-          clients: 'Happy Clients',
+          projectsDesc: 'Delivered with Passion',
           satisfaction: 'Customer Satisfaction',
-          awards: 'Industry Awards'
+          satisfactionDesc: 'Happy Clients Worldwide',
+          clients: 'Happy Clients',
+          clientsDesc: 'Multilingual Experts',
+          awards: 'Industry Awards',
+          awardsDesc: 'Recognized Excellence',
+          ctaButton: 'Ready to Start Your Journey?'
         },
         process: {
           title: 'Our Process',
@@ -335,10 +342,17 @@ const resources = {
           viewAll: 'Посмотреть Все Услуги'
         },
         stats: {
+          welcomeTitle: 'Присоединяйтесь к нашей глобальной семье',
+          welcomeSubtitle: 'Нам доверяют клиенты по всему миру, обеспечивая превосходство в каждом проекте',
           projects: 'Завершенных Проектов',
-          clients: 'Довольных Клиентов',
+          projectsDesc: 'Выполнено с увлечением',
           satisfaction: 'Удовлетворенность Клиентов',
-          awards: 'Отраслевых Наград'
+          satisfactionDesc: 'Довольные клиенты по всему миру',
+          clients: 'Довольных Клиентов',
+          clientsDesc: 'Многоязычные эксперты',
+          awards: 'Отраслевых Наград',
+          awardsDesc: 'Признанное превосходство',
+          ctaButton: 'Готовы начать свое путешествие?'
         },
         process: {
           title: 'Наш Процесс',
@@ -636,10 +650,17 @@ const resources = {
           viewAll: 'Դիտել Բոլոր Ծառայությունները'
         },
         stats: {
+          welcomeTitle: 'Միացե՛ք մեր համաշխարհային ընտանիքին',
+          welcomeSubtitle: 'Մեզ վստահում են հաճախորդները ամբողջ աշխարհում՝ ապահովելով գերազանցություն յուրաքանչյուր նախագծում',
           projects: 'Ավարտված Նախագծեր',
-          clients: 'Գոհ Հաճախորդներ',
+          projectsDesc: 'Իրականացված սիրով',
           satisfaction: 'Հաճախորդների Գոհունակություն',
-          awards: 'Արդյունաբերության Մրցանակներ'
+          satisfactionDesc: 'Գոհ հաճախորդներ ամբողջ աշխարհում',
+          clients: 'Գոհ Հաճախորդներ',
+          clientsDesc: 'Բազմալեզու փորձագետներ',
+          awards: 'Արդյունաբերության Մրցանակներ',
+          awardsDesc: 'Ճանաչված գերազանցություն',
+          ctaButton: 'Պատրա՞ստ եք սկսել ձեր ճանապարհորդությունը'
         },
         process: {
           title: 'Մեր Գործընթացը',
@@ -937,10 +958,17 @@ const resources = {
           viewAll: '查看所有服务'
         },
         stats: {
+          welcomeTitle: '加入我们的全球大家庭',
+          welcomeSubtitle: '受到全球客户的信赖，在每个项目中都追求卓越',
           projects: '已完成项目',
-          clients: '满意客户',
+          projectsDesc: '用心交付',
           satisfaction: '客户满意度',
-          awards: '行业奖项'
+          satisfactionDesc: '全球满意客户',
+          clients: '满意客户',
+          clientsDesc: '多语言专家',
+          awards: '行业奖项',
+          awardsDesc: '公认的卓越',
+          ctaButton: '准备好开始您的旅程了吗？'
         },
         process: {
           title: '我们的流程',
