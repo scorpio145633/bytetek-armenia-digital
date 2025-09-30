@@ -42,8 +42,8 @@ const resources = {
           satisfactionDesc: 'Happy Clients Worldwide',
           clients: 'Happy Clients',
           clientsDesc: 'Multilingual Experts',
-          awards: 'Industry Awards',
-          awardsDesc: 'Recognized Excellence',
+          countries: 'Countries Served',
+          countriesDesc: 'Global Presence',
           ctaButton: 'Ready to Start Your Journey?'
         },
         process: {
@@ -350,8 +350,8 @@ const resources = {
           satisfactionDesc: 'Довольные клиенты по всему миру',
           clients: 'Довольных Клиентов',
           clientsDesc: 'Многоязычные эксперты',
-          awards: 'Отраслевых Наград',
-          awardsDesc: 'Признанное превосходство',
+          countries: 'Обслуживаемых Стран',
+          countriesDesc: 'Глобальное присутствие',
           ctaButton: 'Готовы начать свое путешествие?'
         },
         process: {
@@ -658,8 +658,8 @@ const resources = {
           satisfactionDesc: 'Գոհ հաճախորդներ ամբողջ աշխարհում',
           clients: 'Գոհ Հաճախորդներ',
           clientsDesc: 'Բազմալեզու փորձագետներ',
-          awards: 'Արդյունաբերության Մրցանակներ',
-          awardsDesc: 'Ճանաչված գերազանցություն',
+          countries: 'Սպասարկվող Երկրներ',
+          countriesDesc: 'Համաշխարհային ներկայություն',
           ctaButton: 'Պատրա՞ստ եք սկսել ձեր ճանապարհորդությունը'
         },
         process: {
@@ -966,8 +966,8 @@ const resources = {
           satisfactionDesc: '全球满意客户',
           clients: '满意客户',
           clientsDesc: '多语言专家',
-          awards: '行业奖项',
-          awardsDesc: '公认的卓越',
+          countries: '服务国家',
+          countriesDesc: '全球业务',
           ctaButton: '准备好开始您的旅程了吗？'
         },
         process: {

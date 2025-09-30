@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Rocket, Heart, Globe, Trophy, Sparkles } from 'lucide-react';
+import { Rocket, Heart, Globe, Sparkles } from 'lucide-react';
 
 interface CounterProps {
   end: number;
@@ -73,12 +73,12 @@ const StatsSection = () => {
     { 
       number: 12, 
       suffix: '+', 
-      label: t('home.stats.awards'),
-      description: t('home.stats.awardsDesc'),
-      icon: Trophy,
-      gradient: 'from-amber-500/20 via-amber-500/10 to-transparent',
-      iconColor: 'text-amber-500',
-      glowColor: 'bg-amber-500/20'
+      label: t('home.stats.countries'),
+      description: t('home.stats.countriesDesc'),
+      icon: Globe,
+      gradient: 'from-emerald-500/20 via-emerald-500/10 to-transparent',
+      iconColor: 'text-emerald-500',
+      glowColor: 'bg-emerald-500/20'
     }
   ];
 
