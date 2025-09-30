@@ -13,59 +13,30 @@ const FeaturedServices = () => {
       icon: Code,
       title: t('services.webDev.title'),
       description: t('services.webDev.description'),
-      gradient: "from-blue-500 to-purple-600",
-      features: [
-        t('services.webDev.feature1'),
-        t('services.webDev.feature2'),
-        t('services.webDev.feature3')
-      ]
     },
     {
       icon: Palette,
       title: t('services.uiux.title'),
       description: t('services.uiux.description'),
-      gradient: "from-pink-500 to-rose-600",
-      features: [
-        t('services.uiux.feature1'),
-        t('services.uiux.feature2'),
-        t('services.uiux.feature3')
-      ]
     },
     {
       icon: Smartphone,
       title: t('services.mobile.title'),
       description: t('services.mobile.description'),
-      gradient: "from-green-500 to-teal-600",
-      features: [
-        t('services.mobile.feature1'),
-        t('services.mobile.feature2'),
-        t('services.mobile.feature3')
-      ]
-    },
-    {
-      icon: Cloud,
-      title: t('services.cloud.title'),
-      description: t('services.cloud.description'),
-      gradient: "from-yellow-500 to-orange-600",
-      features: [
-        t('services.cloud.feature1'),
-        t('services.cloud.feature2'),
-        t('services.cloud.feature3')
-      ]
     }
   ];
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="services" className="section-spacing">
+      <div className="container-wide">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 gradient-text">
+          <h2 className="text-heading-lg mb-4">
             {t('home.services.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -73,50 +44,39 @@ const FeaturedServices = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="group perspective-1000"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full hover-lift transform-style-3d transition-transform duration-500 group-hover:rotate-y-12">
-                <CardContent className="p-6 h-full flex flex-col">
-                  {/* Icon with gradient background */}
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.gradient} p-4 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <service.icon className="w-8 h-8 text-white" />
+              <Card className="h-full hover-lift transition-all duration-300 border-border/50">
+                <CardContent className="p-8">
+                  {/* Icon */}
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                    <service.icon className="w-7 h-7 text-primary" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-semibold mb-4 group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl font-bold mb-4">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground mb-6 flex-grow text-sm leading-relaxed">
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
                     {service.description}
                   </p>
 
-                  {/* Features */}
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="text-sm text-muted-foreground flex items-center">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Learn More Link */}
+                  {/* Link */}
                   <Button 
                     variant="ghost" 
-                    className="group/btn justify-between p-0 h-auto font-medium text-primary hover:text-primary"
+                    className="p-0 h-auto font-medium text-primary hover:text-primary group"
                     asChild
                   >
-                    <Link to="/services">
+                    <Link to="/services" className="inline-flex items-center gap-2">
                       {t('common.learnMore')}
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
                 </CardContent>
@@ -125,15 +85,15 @@ const FeaturedServices = () => {
           ))}
         </div>
 
-        {/* View All Services Button */}
+        {/* View All Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-center mt-12"
+          transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          <Button asChild size="lg" className="group hover-glow">
+          <Button asChild size="lg" className="group">
             <Link to="/services">
               {t('home.services.viewAll')}
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

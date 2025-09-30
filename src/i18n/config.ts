@@ -7,15 +7,67 @@ const resources = {
       nav: {
         home: 'Home',
         services: 'Services',
+        portfolio: 'Portfolio',
         about: 'About',
         contact: 'Contact',
+        allServices: 'All Services',
+        getStarted: 'Get Started'
       },
       hero: {
-        title: 'Innovative IT Solutions',
-        subtitle: 'Transforming Ideas into Digital Reality',
-        description: 'Bytetech delivers cutting-edge technology solutions tailored to your business needs. From custom development to comprehensive IT services.',
-        cta: 'Get Started',
-        contact: 'Contact Us',
+        badge: 'Welcome to the Future',
+        title: {
+          part1: 'We build digital',
+          part2: {
+            option1: 'experiences',
+            option2: 'solutions',
+            option3: 'products'
+          }
+        },
+        subtitle: 'that matter',
+        description: 'Transform your vision into reality with cutting-edge web solutions',
+        cta: 'Explore Services',
+        contact: 'Get in Touch'
+      },
+      home: {
+        services: {
+          title: 'Our Services',
+          subtitle: 'Comprehensive solutions tailored to your needs',
+          viewAll: 'View All Services'
+        },
+        stats: {
+          projects: 'Projects Completed',
+          clients: 'Happy Clients',
+          satisfaction: 'Customer Satisfaction',
+          awards: 'Industry Awards'
+        },
+        process: {
+          title: 'Our Process',
+          subtitle: 'A proven methodology for success',
+          step1: { title: 'Discovery', description: 'We analyze your requirements and define project scope' },
+          step2: { title: 'Design', description: 'Creating beautiful, user-centric interfaces' },
+          step3: { title: 'Development', description: 'Building robust, scalable solutions' },
+          step4: { title: 'Delivery', description: 'Launching and supporting your project' }
+        },
+        testimonials: {
+          title: 'Client Success Stories',
+          subtitle: 'See what our clients say about working with us',
+          trustedBy: 'Trusted by leading companies',
+          testimonial1: { quote: 'Working with this team was an absolute pleasure. They delivered beyond our expectations.', highlight: 'Exceeded expectations' },
+          testimonial2: { quote: 'Professional, efficient, and highly skilled. Our project was delivered on time and within budget.', highlight: 'On time delivery' },
+          testimonial3: { quote: 'The attention to detail and commitment to quality is outstanding. Highly recommended!', highlight: 'Outstanding quality' }
+        },
+        cta: {
+          title: 'Ready to start your project?',
+          subtitle: "Let's create something amazing together",
+          contact: 'Contact Us',
+          portfolio: 'View Our Work'
+        }
+      },
+      common: {
+        learnMore: 'Learn More',
+        viewProject: 'View Project',
+        getStarted: 'Get Started',
+        contactUs: 'Contact Us'
       },
       services: {
         title: 'Our Services',
@@ -26,11 +78,31 @@ const resources = {
         },
         webDev: {
           title: 'Web Development',
-          description: 'Modern, responsive websites and web applications built with cutting-edge technologies.',
+          description: 'Custom web applications built with modern technologies',
+          feature1: 'Responsive Design',
+          feature2: 'SEO Optimized',
+          feature3: 'Fast Performance'
         },
-        design: {
+        uiux: {
           title: 'UI/UX Design',
-          description: 'Beautiful, intuitive designs that enhance user experience and drive engagement.',
+          description: 'Beautiful, intuitive interfaces that users love',
+          feature1: 'User Research',
+          feature2: 'Wireframing',
+          feature3: 'Prototyping'
+        },
+        mobile: {
+          title: 'Mobile Development',
+          description: 'Native and cross-platform mobile applications',
+          feature1: 'iOS & Android',
+          feature2: 'Cross-platform',
+          feature3: 'App Store Ready'
+        },
+        cloud: {
+          title: 'Cloud Solutions',
+          description: 'Scalable cloud infrastructure and deployment',
+          feature1: 'Cloud Migration',
+          feature2: 'DevOps',
+          feature3: '24/7 Support'
         },
         workflow: {
           title: 'Workflow Automation',

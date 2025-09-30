@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Play, TrendingUp, Users, Award, Clock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -8,33 +8,55 @@ import HeroSection from '@/components/home/HeroSection';
 import StatsSection from '@/components/home/StatsSection';
 import FeaturedServices from '@/components/home/FeaturedServices';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
-import ParticleBackground from '@/components/ui/ParticleBackground';
 
 const Home = () => {
   const { t } = useTranslation();
+
+  const processSteps = [
+    {
+      number: '01',
+      title: t('home.process.step1.title'),
+      description: t('home.process.step1.description')
+    },
+    {
+      number: '02',
+      title: t('home.process.step2.title'),
+      description: t('home.process.step2.description')
+    },
+    {
+      number: '03',
+      title: t('home.process.step3.title'),
+      description: t('home.process.step3.description')
+    },
+    {
+      number: '04',
+      title: t('home.process.step4.title'),
+      description: t('home.process.step4.description')
+    }
+  ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <HeroSection />
-      
+
       {/* Stats Section */}
       <StatsSection />
-      
+
       {/* Featured Services */}
       <FeaturedServices />
-      
+
       {/* Process Timeline */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="section-spacing">
+        <div className="container-wide">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 gradient-text">
+            <h2 className="text-heading-lg mb-4">
               {t('home.process.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -42,54 +64,28 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: t('home.process.step1.title'),
-                description: t('home.process.step1.description'),
-                icon: Users
-              },
-              {
-                step: "02", 
-                title: t('home.process.step2.title'),
-                description: t('home.process.step2.description'),
-                icon: TrendingUp
-              },
-              {
-                step: "03",
-                title: t('home.process.step3.title'),
-                description: t('home.process.step3.description'),
-                icon: Award
-              },
-              {
-                step: "04",
-                title: t('home.process.step4.title'),
-                description: t('home.process.step4.description'),
-                icon: Clock
-              }
-            ].map((item, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="relative"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className="card-elevated h-full">
-                  <CardContent className="p-6">
-                    <div className="text-6xl font-bold text-primary/20 mb-4">
-                      {item.step}
+                <Card className="h-full hover-lift transition-all duration-300 border-border/50">
+                  <CardContent className="p-8">
+                    <div className="text-6xl font-bold text-primary/20 mb-6">
+                      {step.number}
                     </div>
-                    <item.icon className="w-8 h-8 text-primary mb-4" />
-                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.description}</p>
+                    <h3 className="text-2xl font-bold mb-4">
+                      {step.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {step.description}
+                    </p>
                   </CardContent>
                 </Card>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-primary to-transparent" />
-                )}
               </motion.div>
             ))}
           </div>
@@ -100,33 +96,31 @@ const Home = () => {
       <TestimonialsSection />
 
       {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
-        <ParticleBackground />
-        <div className="container mx-auto px-4 text-center relative z-10">
+      <section className="section-spacing bg-secondary text-secondary-foreground">
+        <div className="container-wide">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-5xl font-bold mb-6 gradient-text">
+            <h2 className="text-heading-lg mb-6">
               {t('home.cta.title')}
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-secondary-foreground/80 mb-10">
               {t('home.cta.subtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="group hover-glow">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button asChild size="lg" variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90">
                 <Link to="/contact">
-                  {t('home.cta.primary')}
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  {t('home.cta.contact')}
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="group">
+              <Button asChild size="lg" variant="outline" className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/10">
                 <Link to="/portfolio">
-                  <Play className="mr-2 h-4 w-4" />
-                  {t('home.cta.secondary')}
+                  {t('home.cta.portfolio')}
                 </Link>
               </Button>
             </div>

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -14,7 +14,16 @@ import logo from '@/assets/logo-full.png';
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -30,78 +39,52 @@ const Header = () => {
     { path: '/contact', label: t('nav.contact') }
   ];
 
-  const services = [
-    { label: t('services.webDev.title'), path: '/services#web-dev' },
-    { label: t('services.uiux.title'), path: '/services#ui-ux' },
-    { label: t('services.mobile.title'), path: '/services#mobile' },
-    { label: t('services.cloud.title'), path: '/services#cloud' }
-  ];
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-glass-border">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'glass border-b border-border shadow-md' 
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="container-wide">
+        <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center group">
             <img 
               src={logo} 
-              alt="Bytetech" 
-              className="h-8 w-auto group-hover:scale-105 transition-transform duration-300" 
+              alt="Logo" 
+              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105" 
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
-              <div key={item.path} className="relative">
-                {item.path === '/services' ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button 
-                        variant="ghost" 
-                        className={`nav-link group ${isActive(item.path) ? 'active' : ''}`}
-                      >
-                        {item.label}
-                        <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-300" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent 
-                      align="start" 
-                      className="glass border-glass-border min-w-[200px]"
-                    >
-                      <DropdownMenuItem asChild>
-                        <Link to="/services" className="flex items-center gap-2">
-                          {t('nav.allServices')}
-                        </Link>
-                      </DropdownMenuItem>
-                      {services.map((service, index) => (
-                        <DropdownMenuItem key={index} asChild>
-                          <Link to={service.path} className="flex items-center gap-2">
-                            {service.label}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <Link 
-                    to={item.path} 
-                    className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
-                  >
-                    {item.label}
-                  </Link>
-                )}
-              </div>
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  isActive(item.path)
+                    ? 'text-foreground bg-muted'
+                    : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
+                }`}
+              >
+                {item.label}
+              </Link>
             ))}
+          </nav>
 
+          {/* Right Side Actions */}
+          <div className="hidden lg:flex items-center gap-3">
             {/* Language Switcher */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover-glow">
+                <Button variant="ghost" size="icon" className="rounded-lg">
                   <Globe className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="glass border-glass-border">
+              <DropdownMenuContent align="end" className="min-w-[140px]">
                 <DropdownMenuItem onClick={() => changeLanguage('en')}>
                   🇺🇸 English
                 </DropdownMenuItem>
@@ -115,22 +98,22 @@ const Header = () => {
             </DropdownMenu>
 
             {/* CTA Button */}
-            <Button asChild className="hover-glow">
+            <Button asChild className="rounded-lg">
               <Link to="/contact">
                 {t('nav.getStarted')}
               </Link>
             </Button>
-          </nav>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="rounded-lg">
                   <Globe className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="glass border-glass-border">
+              <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => changeLanguage('en')}>
                   🇺🇸 English
                 </DropdownMenuItem>
@@ -147,7 +130,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover-glow"
+              className="rounded-lg"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -156,19 +139,23 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <nav className="lg:hidden mt-4 p-4 glass rounded-lg border border-glass-border">
-            <div className="flex flex-col gap-4">
+          <nav className="lg:hidden pb-4">
+            <div className="flex flex-col gap-2 p-4 rounded-lg bg-muted/50">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`nav-link text-left py-2 ${isActive(item.path) ? 'active text-primary' : ''}`}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    isActive(item.path)
+                      ? 'text-foreground bg-background'
+                      : 'text-foreground/70 hover:text-foreground hover:bg-background/50'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <Button asChild className="mt-4">
+              <Button asChild className="mt-2">
                 <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
                   {t('nav.getStarted')}
                 </Link>
