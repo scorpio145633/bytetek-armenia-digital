@@ -93,6 +93,9 @@ const Header = () => {
                 <DropdownMenuItem onClick={() => changeLanguage('hy')}>
                   🇦🇲 Հայերեն
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => changeLanguage('zh-CN')}>
+                  🇨🇳 简体中文
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -121,6 +124,9 @@ const Header = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => changeLanguage('hy')}>
                   🇦🇲 Հայերեն
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => changeLanguage('zh-CN')}>
+                  🇨🇳 简体中文
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

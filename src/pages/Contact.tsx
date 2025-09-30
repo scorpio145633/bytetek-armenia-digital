@@ -58,8 +58,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: t('contact.info.phone.title'),
-      content: t('contact.info.phone.main'),
-      subContent: t('contact.info.phone.support')
+      content: '+357 91620126',
+      subContent: ''
     },
     {
       icon: Mail,
@@ -268,10 +268,12 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     {t('contact.emergency.description')}
                   </p>
-                  <div className="space-y-2">
+                   <div className="space-y-2">
                     <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
                       <span className="text-sm font-medium">{t('contact.emergency.phone')}</span>
-                      <span className="text-sm font-bold text-primary">+374 XX XXX XXX</span>
+                      <a href="tel:+35791620126" className="text-sm font-bold text-primary hover:underline">
+                        +357 91620126
+                      </a>
                     </div>
                     <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
                       <span className="text-sm font-medium">{t('contact.emergency.email')}</span>
