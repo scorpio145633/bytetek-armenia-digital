@@ -204,11 +204,11 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8 text-center"
+            className="mb-8 text-center overflow-visible"
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.95] tracking-tight mb-6">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.95] tracking-tight mb-6 overflow-visible">
               <motion.span
-                className="inline-block bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent"
+                className="inline-block bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent pb-2"
                 animate={{
                   backgroundPosition: ['0%', '100%', '0%'],
                 }}
@@ -217,7 +217,11 @@ const HeroSection = () => {
                   repeat: Infinity,
                   ease: "linear"
                 }}
-                style={{ backgroundSize: '200% auto' }}
+                style={{ 
+                  backgroundSize: '200% auto',
+                  WebkitBoxDecorationBreak: 'clone',
+                  boxDecorationBreak: 'clone'
+                }}
               >
                 {t('hero.title.part1')}
               </motion.span>
