@@ -237,29 +237,69 @@ const HeroSection = () => {
             {t('hero.description')}
           </motion.p>
 
-          {/* Tech Stats */}
+          {/* Rotating Expertise Badges */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-12"
+            className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-12"
           >
             {[
-              { value: '150+', label: 'Projects' },
-              { value: '50+', label: 'Experts' },
-              { value: '12+', label: 'Countries' },
-            ].map((stat, index) => (
+              { text: 'AI/ML', color: 'from-purple-500 to-pink-500', delay: 0 },
+              { text: 'Cloud Native', color: 'from-blue-500 to-cyan-500', delay: 0.1 },
+              { text: 'Blockchain', color: 'from-amber-500 to-orange-500', delay: 0.2 },
+              { text: 'DevOps', color: 'from-green-500 to-emerald-500', delay: 0.3 },
+              { text: 'Microservices', color: 'from-indigo-500 to-purple-500', delay: 0.4 },
+              { text: 'React/Next.js', color: 'from-cyan-500 to-blue-500', delay: 0.5 },
+            ].map((badge, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-4 text-center hover:border-primary/50 transition-colors"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: badge.delay,
+                  type: "spring",
+                  stiffness: 200
+                }}
+                whileHover={{ 
+                  scale: 1.1,
+                  rotate: [0, -5, 5, 0],
+                  transition: { duration: 0.3 }
+                }}
+                className="relative group"
               >
-                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wide">
-                  {stat.label}
-                </div>
+                <motion.div
+                  animate={{
+                    boxShadow: [
+                      '0 0 20px rgba(var(--primary), 0.3)',
+                      '0 0 30px rgba(var(--primary), 0.6)',
+                      '0 0 20px rgba(var(--primary), 0.3)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: badge.delay
+                  }}
+                  className={`px-6 py-3 rounded-full bg-gradient-to-r ${badge.color} font-bold text-white text-sm md:text-base backdrop-blur-sm border border-white/20 cursor-pointer`}
+                >
+                  {badge.text}
+                </motion.div>
+                
+                {/* Rotating ring effect */}
+                <motion.div
+                  className="absolute inset-0 rounded-full border-2 border-white/30"
+                  animate={{
+                    rotate: 360,
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    rotate: { duration: 3, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                />
               </motion.div>
             ))}
           </motion.div>
