@@ -7,6 +7,24 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { z } from 'zod';
+
+// Input validation schema
+const contactSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters')
+    .regex(/^[a-zA-Z\s'-]+$/, 'Name can only contain letters, spaces, hyphens and apostrophes'),
+  email: z.string()
+    .trim()
+    .email('Invalid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  message: z.string()
+    .trim()
+    .min(10, 'Message must be at least 10 characters')
+    .max(2000, 'Message must be less than 2000 characters'),
+});
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -16,17 +34,40 @@ const Contact = () => {
     email: '',
     message: '',
   });
+  const [lastSubmit, setLastSubmit] = useState<number>(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Rate limiting check (60 second cooldown)
+    const now = Date.now();
+    const timeSinceLastSubmit = now - lastSubmit;
+    if (timeSinceLastSubmit < 60000) {
+      const waitTime = Math.ceil((60000 - timeSinceLastSubmit) / 1000);
+      toast.error(`Please wait ${waitTime} seconds before submitting again`);
+      return;
+    }
+
+    // Validate input
+    try {
+      contactSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+        return;
+      }
+    }
+
     setLoading(true);
 
     try {
       const { error } = await supabase.from('contact_messages').insert([
         {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
+          name: formData.name.trim(),
+          email: formData.email.trim().toLowerCase(),
+          message: formData.message.trim(),
+          ip_address: null, // Client-side cannot reliably get IP
+          user_agent: navigator.userAgent,
         },
       ]);
 
@@ -34,8 +75,9 @@ const Contact = () => {
 
       toast.success(t('contact.success'));
       setFormData({ name: '', email: '', message: '' });
+      setLastSubmit(now);
     } catch (error) {
-      console.error('Error submitting contact form:', error);
+      // Generic error message to avoid information disclosure
       toast.error(t('contact.error'));
     } finally {
       setLoading(false);

@@ -10,11 +10,51 @@ import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import ParticleBackground from '@/components/ui/ParticleBackground';
+import { z } from 'zod';
+
+// Input validation schema
+const contactSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters')
+    .regex(/^[a-zA-Z\s'-]+$/, 'Name can only contain letters, spaces, hyphens and apostrophes'),
+  email: z.string()
+    .trim()
+    .email('Invalid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  phone: z.string()
+    .trim()
+    .max(20, 'Phone number too long')
+    .regex(/^[+\d\s()-]*$/, 'Invalid phone number format')
+    .optional()
+    .or(z.literal('')),
+  company: z.string()
+    .trim()
+    .max(100, 'Company name too long')
+    .optional()
+    .or(z.literal('')),
+  subject: z.string()
+    .trim()
+    .max(200, 'Subject too long')
+    .optional()
+    .or(z.literal('')),
+  service: z.string()
+    .trim()
+    .max(100)
+    .optional()
+    .or(z.literal('')),
+  message: z.string()
+    .trim()
+    .min(10, 'Message must be at least 10 characters')
+    .max(2000, 'Message must be less than 2000 characters'),
+});
 
 const Contact = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [lastSubmit, setLastSubmit] = useState<number>(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,16 +67,48 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Rate limiting check (60 second cooldown)
+    const now = Date.now();
+    const timeSinceLastSubmit = now - lastSubmit;
+    if (timeSinceLastSubmit < 60000) {
+      const waitTime = Math.ceil((60000 - timeSinceLastSubmit) / 1000);
+      toast({
+        title: 'Please wait',
+        description: `Please wait ${waitTime} seconds before submitting again`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Validate input
+    try {
+      contactSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: 'Validation Error',
+          description: error.errors[0].message,
+          variant: 'destructive',
+        });
+        return;
+      }
+    }
+
     setLoading(true);
 
     try {
+      const sanitizedMessage = `Phone: ${formData.phone.trim()}\nCompany: ${formData.company.trim()}\nSubject: ${formData.subject.trim()}\nService: ${formData.service.trim()}\n\nMessage:\n${formData.message.trim()}`;
+      
       const { error } = await supabase
         .from('contact_messages')
         .insert([
           {
-            name: formData.name,
-            email: formData.email,
-            message: `Phone: ${formData.phone}\nCompany: ${formData.company}\nSubject: ${formData.subject}\nService: ${formData.service}\n\nMessage:\n${formData.message}`
+            name: formData.name.trim(),
+            email: formData.email.trim().toLowerCase(),
+            message: sanitizedMessage,
+            ip_address: null, // Client-side cannot reliably get IP
+            user_agent: navigator.userAgent,
           }
         ]);
 
@@ -56,7 +128,9 @@ const Contact = () => {
         message: '',
         service: ''
       });
+      setLastSubmit(now);
     } catch (error) {
+      // Generic error message to avoid information disclosure
       toast({
         title: t('contact.form.error.title'),
         description: t('contact.form.error.description'),
