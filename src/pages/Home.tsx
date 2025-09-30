@@ -36,7 +36,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative z-10">
       {/* Hero Section */}
       <HeroSection />
 

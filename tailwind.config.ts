@@ -66,6 +66,12 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      fontSize: {
+        'hero': ['clamp(3rem, 10vw, 8rem)', { lineHeight: '0.95', fontWeight: '700' }],
+        'heading-xl': ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1.1', fontWeight: '700' }],
+        'heading-lg': ['clamp(2rem, 5vw, 4rem)', { lineHeight: '1.1', fontWeight: '700' }],
+        'heading-md': ['clamp(1.5rem, 4vw, 3rem)', { lineHeight: '1.2', fontWeight: '600' }],
+      },
       keyframes: {
         "accordion-down": {
           from: {
