@@ -311,64 +311,59 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-muted/30">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="py-20 bg-gradient-to-b from-background via-muted/20 to-background"
+      >
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 gradient-text">
-              Our Process
-            </h2>
+            <h2 className="text-4xl font-bold mb-4">Our Process</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A proven methodology to deliver exceptional results
+              A proven methodology that delivers results
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
-              {
-                step: "01",
-                title: "Discovery",
-                description: "We analyze your needs and define project scope"
-              },
-              {
-                step: "02",
-                title: "Planning",
-                description: "Create detailed roadmap and technical specifications"
-              },
-              {
-                step: "03",
-                title: "Development",
-                description: "Build and test your solution with agile methodology"
-              },
-              {
-                step: "04",
-                title: "Deployment",
-                description: "Launch and provide ongoing support"
-              }
-            ].map((step, index) => (
+              { step: "01", title: "Discovery", desc: "Understanding your needs and goals" },
+              { step: "02", title: "Planning", desc: "Strategic roadmap development" },
+              { step: "03", title: "Execution", desc: "Building your solution" },
+              { step: "04", title: "Delivery", desc: "Launch and ongoing support" }
+            ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="text-center"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                className="relative"
               >
-                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                  {step.step}
+                <div className="text-center group">
+                  <motion.div 
+                    whileHover={{ scale: 1.1 }}
+                    className="text-6xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent mb-4 opacity-20 group-hover:opacity-40 transition-opacity"
+                  >
+                    {item.step}
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.desc}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                {index < 3 && (
+                  <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent -translate-x-1/2" />
+                )}
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
       <section className="py-20">
