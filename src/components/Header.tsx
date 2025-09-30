@@ -83,7 +83,7 @@ const Header = () => {
                   <Globe className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="min-w-[140px]">
+              <DropdownMenuContent align="end" className="min-w-[140px] bg-popover z-50 border border-border">
                 <DropdownMenuItem onClick={() => changeLanguage('en')}>
                   🇺🇸 English
                 </DropdownMenuItem>
@@ -115,7 +115,7 @@ const Header = () => {
                   <Globe className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="bg-popover z-50 border border-border">
                 <DropdownMenuItem onClick={() => changeLanguage('en')}>
                   🇺🇸 English
                 </DropdownMenuItem>

@@ -3,6 +3,8 @@ import { MapPin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '@/assets/logo-full.png';
+import TrustBadge from '@/components/ui/TrustBadge';
+import StatusIndicator from '@/components/ui/StatusIndicator';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -96,8 +98,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary/20 mt-8 pt-8 text-center text-white/60">
-          <p>© {new Date().getFullYear()} Bytetech. {t('footer.rights')}</p>
+        <div className="border-t border-primary/20 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-white/60">© {new Date().getFullYear()} Bytetech. {t('footer.rights')}</p>
+            <div className="flex items-center gap-4 flex-wrap justify-center">
+              <StatusIndicator status="online" size="sm" />
+              <TrustBadge variant="ssl" size="sm" />
+              <TrustBadge variant="secure" size="sm" />
+            </div>
+          </div>
         </div>
       </div>
     </motion.footer>

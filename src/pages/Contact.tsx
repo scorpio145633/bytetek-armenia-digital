@@ -17,6 +17,30 @@ import {
 } from '@/components/ui/select';
 import SuccessAnimation from '@/components/ui/SuccessAnimation';
 import ParticleBackground from '@/components/ui/ParticleBackground';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+// Input validation schema
+const contactSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters'),
+  email: z.string()
+    .trim()
+    .email('Invalid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  phone: z.string()
+    .trim()
+    .max(20, 'Phone must be less than 20 characters')
+    .optional(),
+  service: z.string().optional(),
+  message: z.string()
+    .trim()
+    .min(10, 'Message must be at least 10 characters')
+    .max(2000, 'Message must be less than 2000 characters'),
+});
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -36,12 +60,50 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate input
+    try {
+      contactSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+        return;
+      }
+    }
+
     setLoading(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setLoading(false);
-    setShowSuccess(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('submit-contact', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+          honeypot: '', // Honeypot field
+        },
+      });
+
+      if (error) throw error;
+
+      if (data?.error) {
+        if (data.retryAfter) {
+          toast.error(`Too many submissions. Please try again in ${Math.ceil(data.retryAfter / 60)} minutes.`);
+        } else {
+          toast.error(data.error);
+        }
+        return;
+      }
+
+      setShowSuccess(true);
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+      console.error('Contact form error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -188,7 +250,7 @@ const Contact = () => {
                           <SelectTrigger className="mt-2">
                             <SelectValue placeholder={t('contact.form.servicePlaceholder')} />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-popover z-50 border border-border">
                             <SelectItem value="web">{t('contact.form.services.web')}</SelectItem>
                             <SelectItem value="mobile">{t('contact.form.services.mobile')}</SelectItem>
                             <SelectItem value="design">{t('contact.form.services.design')}</SelectItem>
