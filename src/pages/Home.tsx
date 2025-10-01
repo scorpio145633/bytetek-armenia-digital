@@ -75,7 +75,7 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               { img: teamCollaboration, title: 'Collaborative Development', delay: 0 },
-              { img: developerCoding, title: 'Code and Planning', delay: 0.1 },
+              { img: developerCoding, title: 'Infrastructure & Roadmapping', delay: 0.1 },
               { img: designersWorking, title: 'Creative Design', delay: 0.2 },
               { img: teamMeeting, title: 'Implementation & Strategy', delay: 0.3 }
             ].map((item, index) => (
