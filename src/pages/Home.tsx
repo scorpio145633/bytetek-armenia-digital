@@ -77,7 +77,7 @@ const Home = () => {
               { img: teamCollaboration, title: 'Collaborative Development', delay: 0 },
               { img: developerCoding, title: 'Code and Planning', delay: 0.1 },
               { img: designersWorking, title: 'Creative Design', delay: 0.2 },
-              { img: teamMeeting, title: 'Strategic Planning', delay: 0.3 }
+              { img: teamMeeting, title: 'Implementation & Strategy', delay: 0.3 }
             ].map((item, index) => (
               <motion.div
                 key={index}
