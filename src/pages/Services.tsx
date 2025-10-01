@@ -292,20 +292,14 @@ const Services = () => {
                       </div>
                     </div>
 
-                    {/* Price & CTA */}
+                    {/* CTA */}
                     <div className="pt-4 border-t border-border">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <span className="text-sm text-muted-foreground">Starting at</span>
-                          <div className="text-2xl font-bold text-primary">{service.price}</div>
-                        </div>
-                        <Button asChild className="group">
-                          <Link to="/contact">
-                            Get Quote
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                          </Link>
-                        </Button>
-                      </div>
+                      <Button asChild className="group w-full">
+                        <Link to="/contact">
+                          Get Quote
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
