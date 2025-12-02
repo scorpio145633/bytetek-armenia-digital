@@ -130,14 +130,8 @@ export type Database = {
         }
         Returns: boolean
       }
-      cleanup_old_rate_limits: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      is_admin: {
-        Args: { user_id: string }
-        Returns: boolean
-      }
+      cleanup_old_rate_limits: { Args: never; Returns: undefined }
+      is_admin: { Args: { user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"

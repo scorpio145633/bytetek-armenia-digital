@@ -253,7 +253,7 @@ const resources = {
           },
           phone: {
             title: 'Phone',
-            main: '+357 91620126'
+            main: '+374 91 620126'
           },
           email: {
             title: 'Email',
@@ -273,7 +273,7 @@ const resources = {
           email: 'Email Address',
           emailPlaceholder: 'john@example.com',
           phone: 'Phone Number',
-          phonePlaceholder: '+357 91620126',
+          phonePlaceholder: '+374 91 620126',
           service: 'Service Interest',
           servicePlaceholder: 'Select a service',
           services: {
@@ -561,7 +561,7 @@ const resources = {
           },
           phone: {
             title: 'Телефон',
-            main: '+357 91620126'
+            main: '+374 91 620126'
           },
           email: {
             title: 'Email',
@@ -581,7 +581,7 @@ const resources = {
           email: 'Email Адрес',
           emailPlaceholder: 'ivan@example.com',
           phone: 'Номер Телефона',
-          phonePlaceholder: '+357 91620126',
+          phonePlaceholder: '+374 91 620126',
           service: 'Интересующая Услуга',
           servicePlaceholder: 'Выберите услугу',
           services: {
@@ -869,7 +869,7 @@ const resources = {
           },
           phone: {
             title: 'Հեռախոս',
-            main: '+357 91620126'
+            main: '+374 91 620126'
           },
           email: {
             title: 'Էլ․ Փոստ',
@@ -889,7 +889,7 @@ const resources = {
           email: 'Էլ․ Փոստի Հասցե',
           emailPlaceholder: 'ani@example.com',
           phone: 'Հեռախոսահամար',
-          phonePlaceholder: '+357 91620126',
+          phonePlaceholder: '+374 91 620126',
           service: 'Հետաքրքրվող Ծառայություն',
           servicePlaceholder: 'Ընտրեք ծառայություն',
           services: {
@@ -1177,7 +1177,7 @@ const resources = {
           },
           phone: {
             title: '电话',
-            main: '+357 91620126'
+            main: '+374 91 620126'
           },
           email: {
             title: '电子邮箱',
@@ -1197,7 +1197,7 @@ const resources = {
           email: '电子邮箱地址',
           emailPlaceholder: 'zhangsan@example.com',
           phone: '电话号码',
-          phonePlaceholder: '+357 91620126',
+          phonePlaceholder: '+374 91 620126',
           service: '服务意向',
           servicePlaceholder: '选择服务',
           services: {
