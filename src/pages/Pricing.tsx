@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { Check, Star, Zap, Shield, Clock, Users, HeadphonesIcon, Server } from 'lucide-react';
+import { Check, Star, Zap, Shield, Clock, Users, HeadphonesIcon, Server, X, Cloud, Database, Lock, Monitor, Settings, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import ParticleBackground from '@/components/ui/ParticleBackground';
 
 const Pricing = () => {
@@ -71,6 +72,54 @@ const Pricing = () => {
       popular: false,
       gradient: 'from-purple-500/20 to-pink-500/20',
       borderGlow: 'hover:shadow-purple-500/20',
+    },
+  ];
+
+  const comparisonFeatures = [
+    { key: 'engineer', business: true, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'response', business: true, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'remote', business: true, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'afterHours', business: true, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'security', business: true, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'database', business: true, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'cloud', business: false, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'priority', business: false, businessPro: true, businessProMax: true, enterprise: true },
+    { key: 'accountManager', business: false, businessPro: false, businessProMax: true, enterprise: true },
+    { key: 'mobile', business: false, businessPro: false, businessProMax: true, enterprise: true },
+    { key: 'customSLA', business: false, businessPro: false, businessProMax: false, enterprise: true },
+    { key: 'multiLocation', business: false, businessPro: false, businessProMax: false, enterprise: true },
+  ];
+
+  const technologies = [
+    {
+      category: t('pricing.technologies.cloudPlatforms'),
+      icon: Cloud,
+      items: ['AWS', 'Microsoft Azure', 'Google Cloud']
+    },
+    {
+      category: t('pricing.technologies.databases'),
+      icon: Database,
+      items: ['SQL Server', 'PostgreSQL', 'MongoDB', 'MySQL']
+    },
+    {
+      category: t('pricing.technologies.security'),
+      icon: Lock,
+      items: ['Firewall', 'Antivirus', 'VPN', 'IAM']
+    },
+    {
+      category: t('pricing.technologies.monitoring'),
+      icon: Monitor,
+      items: ['Prometheus', 'Grafana', 'Datadog']
+    },
+    {
+      category: t('pricing.technologies.devops'),
+      icon: Settings,
+      items: ['Docker', 'Kubernetes', 'CI/CD']
+    },
+    {
+      category: t('pricing.technologies.collaboration'),
+      icon: MessageSquare,
+      items: ['Microsoft 365', 'Google Workspace', 'Slack']
     },
   ];
 
@@ -201,6 +250,123 @@ const Pricing = () => {
               </CardContent>
             </Card>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section className="relative pb-16 md:pb-24">
+        <div className="container-wide relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('pricing.comparison.title')}</h2>
+            <p className="text-muted-foreground">{t('pricing.comparison.subtitle')}</p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="overflow-x-auto"
+          >
+            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-border/50">
+                    <TableHead className="min-w-[200px] text-foreground font-semibold">{t('pricing.comparison.feature')}</TableHead>
+                    <TableHead className="text-center min-w-[120px] text-foreground font-semibold">Business</TableHead>
+                    <TableHead className="text-center min-w-[120px] bg-primary/10 text-foreground font-semibold">Business Pro</TableHead>
+                    <TableHead className="text-center min-w-[140px] text-foreground font-semibold">Business Pro Max</TableHead>
+                    <TableHead className="text-center min-w-[120px] text-foreground font-semibold">Enterprise</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {comparisonFeatures.map((feature, index) => (
+                    <TableRow key={feature.key} className="border-border/30">
+                      <TableCell className="text-foreground/90 font-medium">
+                        {t(`pricing.comparison.features.${feature.key}`)}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {feature.business ? (
+                          <Check className="w-5 h-5 text-primary mx-auto" />
+                        ) : (
+                          <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />
+                        )}
+                      </TableCell>
+                      <TableCell className="text-center bg-primary/5">
+                        {feature.businessPro ? (
+                          <Check className="w-5 h-5 text-primary mx-auto" />
+                        ) : (
+                          <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />
+                        )}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {feature.businessProMax ? (
+                          <Check className="w-5 h-5 text-primary mx-auto" />
+                        ) : (
+                          <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />
+                        )}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {feature.enterprise ? (
+                          <Check className="w-5 h-5 text-primary mx-auto" />
+                        ) : (
+                          <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="relative pb-16 md:pb-24">
+        <div className="container-wide relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('pricing.technologies.title')}</h2>
+            <p className="text-muted-foreground">{t('pricing.technologies.subtitle')}</p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {technologies.map((tech, index) => (
+              <motion.div
+                key={tech.category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+              >
+                <Card className="h-full bg-card/30 backdrop-blur-sm border-border/30 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <tech.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-foreground">{tech.category}</h3>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {tech.items.map((item) => (
+                        <Badge key={item} variant="secondary" className="bg-muted/50 text-foreground/80 hover:bg-muted">
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

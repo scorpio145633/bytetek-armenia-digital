@@ -35,6 +35,15 @@ const TrustBadge = ({
   };
   const badge = badges[variant];
   const Icon = badge.icon;
-  return;
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className={`inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r ${badge.gradient} border border-border/50 backdrop-blur-sm ${sizeClasses[size]}`}
+    >
+      <Icon className={`${badge.iconColor} ${size === 'sm' ? 'w-3 h-3' : size === 'md' ? 'w-4 h-4' : 'w-5 h-5'}`} />
+      <span className="font-medium text-foreground/90">{badge.text}</span>
+    </motion.div>
+  );
 };
 export default TrustBadge;
