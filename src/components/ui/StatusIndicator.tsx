@@ -1,15 +1,13 @@
 import { motion } from 'framer-motion';
-
 interface StatusIndicatorProps {
   status?: 'online' | 'away' | 'busy';
   showText?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
-
-const StatusIndicator = ({ 
-  status = 'online', 
+const StatusIndicator = ({
+  status = 'online',
   showText = true,
-  size = 'md' 
+  size = 'md'
 }: StatusIndicatorProps) => {
   const statusConfig = {
     online: {
@@ -28,35 +26,15 @@ const StatusIndicator = ({
       glow: 'shadow-[0_0_12px_rgba(239,68,68,0.6)]'
     }
   };
-
   const sizeClasses = {
     sm: 'w-2 h-2',
     md: 'w-3 h-3',
     lg: 'w-4 h-4'
   };
-
   const config = statusConfig[status];
-
-  return (
-    <div className="inline-flex items-center gap-2">
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className={`${sizeClasses[size]} ${config.color} ${config.glow} rounded-full`}
-      />
-      {showText && (
-        <span className="text-sm font-medium text-foreground/80">
-          {config.text}
-        </span>
-      )}
-    </div>
-  );
+  return <div className="inline-flex items-center gap-2">
+      
+      {showText}
+    </div>;
 };
-
 export default StatusIndicator;
