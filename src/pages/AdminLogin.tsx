@@ -8,7 +8,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
-import { Shield, Lock } from 'lucide-react';
+import { Shield, Lock, Check, X } from 'lucide-react';
+import { z } from 'zod';
+
+const passwordSchema = z.string()
+  .min(12, 'Password must be at least 12 characters')
+  .regex(/[A-Z]/, 'Must contain an uppercase letter')
+  .regex(/[a-z]/, 'Must contain a lowercase letter')
+  .regex(/[0-9]/, 'Must contain a number')
+  .regex(/[^A-Za-z0-9]/, 'Must contain a special character');
+
+const getPasswordStrength = (password: string) => ({
+  minLength: password.length >= 12,
+  hasUppercase: /[A-Z]/.test(password),
+  hasLowercase: /[a-z]/.test(password),
+  hasNumber: /[0-9]/.test(password),
+  hasSpecial: /[^A-Za-z0-9]/.test(password),
+});
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -74,6 +90,14 @@ const AdminLogin = () => {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate password strength
+    const passwordValidation = passwordSchema.safeParse(password);
+    if (!passwordValidation.success) {
+      toast.error(passwordValidation.error.errors[0].message);
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -96,6 +120,14 @@ const AdminLogin = () => {
       setLoading(false);
     }
   };
+
+  const passwordStrength = getPasswordStrength(password);
+  const PasswordRequirement = ({ met, text }: { met: boolean; text: string }) => (
+    <div className={`flex items-center gap-2 text-xs ${met ? 'text-green-500' : 'text-muted-foreground'}`}>
+      {met ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />}
+      {text}
+    </div>
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/5 p-4">
@@ -193,14 +225,22 @@ const AdminLogin = () => {
                       required
                       className="mt-2"
                       placeholder="••••••••"
-                      minLength={6}
                     />
+                    {password && (
+                      <div className="mt-2 space-y-1">
+                        <PasswordRequirement met={passwordStrength.minLength} text="At least 12 characters" />
+                        <PasswordRequirement met={passwordStrength.hasUppercase} text="Uppercase letter" />
+                        <PasswordRequirement met={passwordStrength.hasLowercase} text="Lowercase letter" />
+                        <PasswordRequirement met={passwordStrength.hasNumber} text="Number" />
+                        <PasswordRequirement met={passwordStrength.hasSpecial} text="Special character" />
+                      </div>
+                    )}
                   </div>
 
                   <Button
                     type="submit"
                     className="w-full"
-                    disabled={loading}
+                    disabled={loading || !Object.values(passwordStrength).every(Boolean)}
                   >
                     {loading ? 'Creating account...' : 'Create Account'}
                   </Button>
