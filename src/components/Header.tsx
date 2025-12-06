@@ -102,7 +102,7 @@ const Header = () => {
 
             {/* CTA Button */}
             <Button asChild className="rounded-lg">
-              <Link to="/contact">
+              <Link to="/pricing">
                 {t('nav.getStarted')}
               </Link>
             </Button>
@@ -162,7 +162,7 @@ const Header = () => {
                 </Link>
               ))}
               <Button asChild className="mt-2">
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/pricing" onClick={() => setIsMenuOpen(false)}>
                   {t('nav.getStarted')}
                 </Link>
               </Button>

@@ -291,7 +291,7 @@ const HeroSection = () => {
               asChild
               className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 group font-semibold shadow-[0_0_30px_rgba(var(--primary),0.3)] hover:shadow-[0_0_50px_rgba(var(--primary),0.5)] transition-all duration-300"
             >
-              <Link to="/contact">
+              <Link to="/pricing">
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
