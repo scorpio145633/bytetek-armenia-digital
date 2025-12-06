@@ -108,8 +108,6 @@ const Footer = () => {
             <p className="text-white/60">© {new Date().getFullYear()} Bytetech. {t('footer.rights')}</p>
             <div className="flex items-center gap-4 flex-wrap justify-center">
               <StatusIndicator status="online" size="sm" />
-              <TrustBadge variant="ssl" size="sm" />
-              <TrustBadge variant="secure" size="sm" />
             </div>
           </div>
         </div>
