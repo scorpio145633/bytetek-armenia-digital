@@ -90,6 +90,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/terms-of-service" className="text-white/70 hover:text-primary transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
                 <Link to="/cookies-policy" className="text-white/70 hover:text-primary transition-colors">
                   Cookies Policy
                 </Link>
