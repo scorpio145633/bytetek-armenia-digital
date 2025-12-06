@@ -104,11 +104,11 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary/20 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-white/60">© {new Date().getFullYear()} Bytetech. {t('footer.rights')}</p>
+          <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex items-center gap-4 flex-wrap justify-center">
               <StatusIndicator status="online" size="sm" />
             </div>
+            <p className="text-white/60 text-center">© {new Date().getFullYear()} Bytetech. {t('footer.rights')}</p>
           </div>
         </div>
       </div>
