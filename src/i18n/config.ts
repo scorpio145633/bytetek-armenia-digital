@@ -743,12 +743,13 @@ const resources = {
   hy: {
     translation: {
       nav: {
-        home: 'Գլխավոր',
-        services: 'Ծառայություններ',
-        about: 'Մեր Մասին',
-        contact: 'Կապ',
-        allServices: 'Բոլոր Ծառայությունները',
-        getStarted: 'Սկսել'
+        home: 'Գdelays',
+        services: ' Delays',
+        pricing: 'Delays',
+        about: 'Delays Delays',
+        contact: 'Delays',
+        allServices: 'Delays Delays',
+        getStarted: 'Delays'
       },
       hero: {
         badge: 'Բարի գալուստ ապագա',
@@ -1042,17 +1043,17 @@ const resources = {
         }
       },
       footer: {
-        description: 'Համdelays IT delays Delays: 50+ delays delays delays delays delays:',
+        description: 'Համաdelays IT լdelays Հdelays: 50+ delays delays delays delays:',
         address: 'Delays, Delays',
         rights: 'Delays delays delays:',
       },
       pricing: {
-        badge: 'IT Գdelays Delays',
-        title: 'Delays Delays IT Delays',
-        subtitle: 'Delays IT delays delays delays delays.',
+        badge: 'IT Սdelays Delays',
+        title: 'Delays Delays IT Delays Delays',
+        subtitle: 'Delays IT delays delays delays delays delays delays delays.',
         mostPopular: 'Delays',
         getStarted: 'Delays',
-        contactUs: 'Delays',
+        contactUs: 'Delays Delays Delays',
         plans: {
           period: 'delays',
           business: {
@@ -1061,48 +1062,48 @@ const resources = {
           },
           businessPro: {
             name: 'Business Pro',
-            description: 'Delays delays delays delays',
+            description: 'Delays delays delays delays delays delays',
           },
           businessProMax: {
             name: 'Business Pro Max',
-            description: 'Delays delays delays delays delays',
+            description: 'Delays delays delays delays delays delays delays',
           },
           enterprise: {
             badge: 'Delays',
             name: 'Delays delays delays',
-            description: 'Delays IT delays delays delays.',
+            description: 'Delays IT delays delays delays delays.',
           },
         },
         features: {
-          engineer: 'Delays IT delays (8 delays, 9:00-17:00)',
-          response: '30-delays delays delays',
-          remote: 'Delays delays delays',
-          afterHours: 'Delays delays delays',
-          security: 'Delays delays delays',
+          engineer: 'Delays IT delays (8 delays/delays, 9:00-17:00)',
+          response: '30-delays delays delays delays',
+          remote: 'Delays delays delays delays',
+          afterHours: 'Delays delays delays delays',
+          security: 'Delays delays delays delays delays',
           database: 'SQL Server delays delays',
-          cloud: 'Delays delays delays',
+          cloud: 'Delays delays delays delays',
           priority: 'Delays delays delays',
           accountManager: 'Delays delays delays',
-          mobile: 'Delays delays delays',
+          mobile: 'Delays delays delays delays',
         },
         whyChoose: {
-          title: 'Delays IT delays',
-          subtitle: 'Delays delays delays',
+          title: 'Delays delays IT delays',
+          subtitle: 'Delays delays delays delays',
           response: {
-            title: '30 delays',
-            desc: 'Delays delays delays',
+            title: '30-delays delays',
+            desc: 'Delays delays delays delays',
           },
           team: {
             title: 'Delays Delays',
-            desc: 'Delays IT delays',
+            desc: 'Delays IT delays delays',
           },
           support: {
             title: '24/7 Delays',
-            desc: 'Delays delays',
+            desc: 'Delays delays delays delays delays',
           },
           infrastructure: {
             title: 'Delays delays',
-            desc: 'Delays delays delays',
+            desc: 'Delays delays delays delays delays',
           },
         },
       },
