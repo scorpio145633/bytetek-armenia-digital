@@ -7,6 +7,7 @@ const resources = {
       nav: {
         home: 'Home',
         services: 'Services',
+        pricing: 'Pricing',
         about: 'About',
         contact: 'Contact',
         allServices: 'All Services',
@@ -308,6 +309,66 @@ const resources = {
         address: 'Yerevan, Armenia',
         rights: 'All rights reserved.',
       },
+      pricing: {
+        badge: 'IT Maintenance Packages',
+        title: 'Choose Your IT Support Plan',
+        subtitle: 'Comprehensive IT maintenance services tailored for your business needs with dedicated support and rapid response times.',
+        mostPopular: 'Most Popular',
+        getStarted: 'Get Started',
+        contactUs: 'Contact Us',
+        plans: {
+          period: 'month',
+          business: {
+            name: 'Business',
+            description: 'Core IT maintenance essentials for growing businesses',
+          },
+          businessPro: {
+            name: 'Business Pro',
+            description: 'Enhanced support with priority response and cloud integration',
+          },
+          businessProMax: {
+            name: 'Business Pro Max',
+            description: 'Full enterprise coverage with dedicated account management',
+          },
+          enterprise: {
+            badge: 'Enterprise',
+            name: 'Custom Enterprise Solutions',
+            description: 'Tailored IT solutions for large organizations with custom requirements and dedicated infrastructure.',
+          },
+        },
+        features: {
+          engineer: 'Dedicated IT software engineer (8hr/day, 9am-5pm)',
+          response: '30-minute disaster recovery on-call response',
+          remote: 'Remote desktop control support',
+          afterHours: 'After-hours availability for emergencies',
+          security: 'Regular security audits & vulnerability assessments',
+          database: 'SQL Server database administration',
+          cloud: 'Cloud-based system integration & support',
+          priority: 'Priority response queue',
+          accountManager: 'Dedicated account manager',
+          mobile: 'Mobile and desktop application support',
+        },
+        whyChoose: {
+          title: 'Why Choose Our IT Services',
+          subtitle: 'Enterprise-grade support with a personal touch',
+          response: {
+            title: '30-Min Response',
+            desc: 'Rapid disaster recovery response guaranteed',
+          },
+          team: {
+            title: 'Dedicated Team',
+            desc: 'Your own IT engineer available daily',
+          },
+          support: {
+            title: '24/7 Support',
+            desc: 'After-hours availability for critical issues',
+          },
+          infrastructure: {
+            title: 'Cloud Ready',
+            desc: 'Full cloud integration and migration support',
+          },
+        },
+      },
     },
   },
   ru: {
@@ -315,6 +376,7 @@ const resources = {
       nav: {
         home: 'Главная',
         services: 'Услуги',
+        pricing: 'Тарифы',
         about: 'О нас',
         contact: 'Контакты',
         allServices: 'Все Услуги',
@@ -615,6 +677,66 @@ const resources = {
         description: 'Глобальные IT решения из Армении. 50+ профессионалов обслуживают клиентов по всему миру.',
         address: 'Ереван, Армения',
         rights: 'Все права защищены.',
+      },
+      pricing: {
+        badge: 'Пакеты IT-обслуживания',
+        title: 'Выберите план IT-поддержки',
+        subtitle: 'Комплексные услуги IT-обслуживания, адаптированные для вашего бизнеса с выделенной поддержкой и быстрым временем реагирования.',
+        mostPopular: 'Популярный',
+        getStarted: 'Начать',
+        contactUs: 'Связаться',
+        plans: {
+          period: 'месяц',
+          business: {
+            name: 'Business',
+            description: 'Основы IT-обслуживания для растущего бизнеса',
+          },
+          businessPro: {
+            name: 'Business Pro',
+            description: 'Расширенная поддержка с приоритетным ответом и облачной интеграцией',
+          },
+          businessProMax: {
+            name: 'Business Pro Max',
+            description: 'Полное корпоративное покрытие с выделенным менеджером',
+          },
+          enterprise: {
+            badge: 'Корпоративный',
+            name: 'Индивидуальные корпоративные решения',
+            description: 'Персонализированные IT-решения для крупных организаций с особыми требованиями и выделенной инфраструктурой.',
+          },
+        },
+        features: {
+          engineer: 'Выделенный IT-инженер (8 ч/день, 9:00-17:00)',
+          response: '30-минутное реагирование при аварийных ситуациях',
+          remote: 'Удаленная поддержка с управлением рабочим столом',
+          afterHours: 'Доступность в нерабочее время для экстренных случаев',
+          security: 'Регулярные аудиты безопасности и оценка уязвимостей',
+          database: 'Администрирование баз данных SQL Server',
+          cloud: 'Интеграция и поддержка облачных систем',
+          priority: 'Приоритетная очередь ответов',
+          accountManager: 'Выделенный менеджер аккаунта',
+          mobile: 'Поддержка мобильных и десктопных приложений',
+        },
+        whyChoose: {
+          title: 'Почему выбирают наши IT-услуги',
+          subtitle: 'Корпоративная поддержка с индивидуальным подходом',
+          response: {
+            title: '30-мин ответ',
+            desc: 'Гарантированное быстрое реагирование при авариях',
+          },
+          team: {
+            title: 'Выделенная команда',
+            desc: 'Ваш личный IT-инженер доступен ежедневно',
+          },
+          support: {
+            title: 'Поддержка 24/7',
+            desc: 'Доступность в нерабочее время для критических проблем',
+          },
+          infrastructure: {
+            title: 'Готовность к облаку',
+            desc: 'Полная облачная интеграция и поддержка миграции',
+          },
+        },
       },
     },
   },
@@ -920,9 +1042,69 @@ const resources = {
         }
       },
       footer: {
-        description: 'Համաշխարհային IT լուծումներ Հայաստանից: 50+ մասնագետներ սպասարկում են հաճախորդներին ամբողջ աշխարհում:',
-        address: 'Երևան, Հայաստան',
-        rights: 'Բոլոր իրավունքները պաշտպանված են:',
+        description: 'Համdelays IT delays Delays: 50+ delays delays delays delays delays:',
+        address: 'Delays, Delays',
+        rights: 'Delays delays delays:',
+      },
+      pricing: {
+        badge: 'IT Գdelays Delays',
+        title: 'Delays Delays IT Delays',
+        subtitle: 'Delays IT delays delays delays delays.',
+        mostPopular: 'Delays',
+        getStarted: 'Delays',
+        contactUs: 'Delays',
+        plans: {
+          period: 'delays',
+          business: {
+            name: 'Business',
+            description: 'Delays IT delays delays delays',
+          },
+          businessPro: {
+            name: 'Business Pro',
+            description: 'Delays delays delays delays',
+          },
+          businessProMax: {
+            name: 'Business Pro Max',
+            description: 'Delays delays delays delays delays',
+          },
+          enterprise: {
+            badge: 'Delays',
+            name: 'Delays delays delays',
+            description: 'Delays IT delays delays delays.',
+          },
+        },
+        features: {
+          engineer: 'Delays IT delays (8 delays, 9:00-17:00)',
+          response: '30-delays delays delays',
+          remote: 'Delays delays delays',
+          afterHours: 'Delays delays delays',
+          security: 'Delays delays delays',
+          database: 'SQL Server delays delays',
+          cloud: 'Delays delays delays',
+          priority: 'Delays delays delays',
+          accountManager: 'Delays delays delays',
+          mobile: 'Delays delays delays',
+        },
+        whyChoose: {
+          title: 'Delays IT delays',
+          subtitle: 'Delays delays delays',
+          response: {
+            title: '30 delays',
+            desc: 'Delays delays delays',
+          },
+          team: {
+            title: 'Delays Delays',
+            desc: 'Delays IT delays',
+          },
+          support: {
+            title: '24/7 Delays',
+            desc: 'Delays delays',
+          },
+          infrastructure: {
+            title: 'Delays delays',
+            desc: 'Delays delays delays',
+          },
+        },
       },
     },
   },
@@ -930,8 +1112,9 @@ const resources = {
     translation: {
       nav: {
         home: '首页',
-        about: '关于我们',
         services: '服务',
+        pricing: '价格',
+        about: '关于我们',
         contact: '联系我们',
         allServices: '所有服务',
         getStarted: '开始'
@@ -1231,6 +1414,41 @@ const resources = {
         description: '从亚美尼亚交付的全球IT解决方案。50多名专业人士为全球客户提供服务。',
         address: '埃里温，亚美尼亚',
         rights: '保留所有权利。',
+      },
+      pricing: {
+        badge: 'IT维护套餐',
+        title: '选择您的IT支持计划',
+        subtitle: '全面的IT维护服务，满足您的业务需求，提供专业支持和快速响应。',
+        mostPopular: '热门',
+        getStarted: '开始',
+        contactUs: '联系我们',
+        plans: {
+          period: '月',
+          business: { name: 'Business', description: '满足成长型企业的核心IT维护需求' },
+          businessPro: { name: 'Business Pro', description: '增强支持，优先响应和云集成' },
+          businessProMax: { name: 'Business Pro Max', description: '全面企业覆盖，配备专属客户经理' },
+          enterprise: { badge: '企业版', name: '定制企业解决方案', description: '为大型组织提供定制IT解决方案。' },
+        },
+        features: {
+          engineer: '专属IT工程师 (8小时/天, 9am-5pm)',
+          response: '30分钟灾难恢复响应',
+          remote: '远程桌面控制支持',
+          afterHours: '非工作时间紧急支持',
+          security: '定期安全审计和漏洞评估',
+          database: 'SQL Server数据库管理',
+          cloud: '云系统集成与支持',
+          priority: '优先响应队列',
+          accountManager: '专属客户经理',
+          mobile: '移动和桌面应用支持',
+        },
+        whyChoose: {
+          title: '为什么选择我们的IT服务',
+          subtitle: '企业级支持，个性化服务',
+          response: { title: '30分钟响应', desc: '保证快速灾难恢复响应' },
+          team: { title: '专属团队', desc: '您的专属IT工程师每日在线' },
+          support: { title: '24/7支持', desc: '关键问题非工作时间可用' },
+          infrastructure: { title: '云端就绪', desc: '全面云集成和迁移支持' },
+        },
       },
     },
   },
