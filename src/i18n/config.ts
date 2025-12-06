@@ -309,6 +309,20 @@ const resources = {
         address: 'Yerevan, Armenia',
         rights: 'All rights reserved.',
       },
+      legal: {
+        terms: {
+          title: 'Terms of Service',
+          lastUpdated: 'Last updated',
+        },
+        privacy: {
+          title: 'Privacy Policy',
+          lastUpdated: 'Last updated',
+        },
+        cookies: {
+          title: 'Cookies Policy',
+          lastUpdated: 'Last updated',
+        },
+      },
       pricing: {
         badge: 'IT Maintenance Packages',
         title: 'Choose Your IT Support Plan',
@@ -744,10 +758,10 @@ const resources = {
     translation: {
       nav: {
         home: 'Գdelays',
-        services: ' Delays',
-        pricing: 'Delays',
-        about: 'Delays Delays',
-        contact: 'Delays',
+        services: 'Ծdelays',
+        pricing: 'Գdelays',
+        about: 'Մdelays Մdelays',
+        contact: 'Կdelays',
         allServices: 'Delays Delays',
         getStarted: 'Delays'
       },
@@ -1043,67 +1057,81 @@ const resources = {
         }
       },
       footer: {
-        description: 'Համաdelays IT լdelays Հdelays: 50+ delays delays delays delays:',
-        address: 'Delays, Delays',
-        rights: 'Delays delays delays:',
+        description: 'Global IT solutions from Armenia: 50+ professionals worldwide.',
+        address: 'Yerevan, Armenia',
+        rights: 'All rights reserved.',
+      },
+      legal: {
+        terms: {
+          title: 'Terms of Service',
+          lastUpdated: 'Last updated',
+        },
+        privacy: {
+          title: 'Privacy Policy',
+          lastUpdated: 'Last updated',
+        },
+        cookies: {
+          title: 'Cookies Policy',
+          lastUpdated: 'Last updated',
+        },
       },
       pricing: {
-        badge: 'IT Սdelays Delays',
-        title: 'Delays Delays IT Delays Delays',
-        subtitle: 'Delays IT delays delays delays delays delays delays delays.',
-        mostPopular: 'Delays',
-        getStarted: 'Delays',
-        contactUs: 'Delays Delays Delays',
+        badge: 'IT Maintenance Packages',
+        title: 'Choose Your IT Support Plan',
+        subtitle: 'Comprehensive IT maintenance services for your business needs.',
+        mostPopular: 'Most Popular',
+        getStarted: 'Get Started',
+        contactUs: 'Contact Us',
         plans: {
-          period: 'delays',
+          period: 'month',
           business: {
             name: 'Business',
-            description: 'Delays IT delays delays delays',
+            description: 'Core IT maintenance for growing businesses',
           },
           businessPro: {
             name: 'Business Pro',
-            description: 'Delays delays delays delays delays delays',
+            description: 'Enhanced support with priority response',
           },
           businessProMax: {
             name: 'Business Pro Max',
-            description: 'Delays delays delays delays delays delays delays',
+            description: 'Full enterprise coverage with dedicated manager',
           },
           enterprise: {
-            badge: 'Delays',
-            name: 'Delays delays delays',
-            description: 'Delays IT delays delays delays delays.',
+            badge: 'Enterprise',
+            name: 'Custom Enterprise Solutions',
+            description: 'Tailored IT solutions for large organizations.',
           },
         },
         features: {
-          engineer: 'Delays IT delays (8 delays/delays, 9:00-17:00)',
-          response: '30-delays delays delays delays',
-          remote: 'Delays delays delays delays',
-          afterHours: 'Delays delays delays delays',
-          security: 'Delays delays delays delays delays',
-          database: 'SQL Server delays delays',
-          cloud: 'Delays delays delays delays',
-          priority: 'Delays delays delays',
-          accountManager: 'Delays delays delays',
-          mobile: 'Delays delays delays delays',
+          engineer: 'Dedicated IT engineer (8hr/day, 9:00-17:00)',
+          response: '30-minute disaster recovery response',
+          remote: 'Remote desktop control support',
+          afterHours: 'After-hours availability',
+          security: 'Regular security audits',
+          database: 'SQL Server administration',
+          cloud: 'Cloud system integration',
+          priority: 'Priority response queue',
+          accountManager: 'Dedicated account manager',
+          mobile: 'Mobile and desktop support',
         },
         whyChoose: {
-          title: 'Delays delays IT delays',
-          subtitle: 'Delays delays delays delays',
+          title: 'Why Choose Our IT Services',
+          subtitle: 'Enterprise-grade support',
           response: {
-            title: '30-delays delays',
-            desc: 'Delays delays delays delays',
+            title: '30-Min Response',
+            desc: 'Rapid disaster recovery',
           },
           team: {
-            title: 'Delays Delays',
-            desc: 'Delays IT delays delays',
+            title: 'Dedicated Team',
+            desc: 'Your own IT engineer',
           },
           support: {
-            title: '24/7 Delays',
-            desc: 'Delays delays delays delays delays',
+            title: '24/7 Support',
+            desc: 'After-hours availability',
           },
           infrastructure: {
-            title: 'Delays delays',
-            desc: 'Delays delays delays delays delays',
+            title: 'Cloud Ready',
+            desc: 'Full cloud integration',
           },
         },
       },
@@ -1415,6 +1443,20 @@ const resources = {
         description: '从亚美尼亚交付的全球IT解决方案。50多名专业人士为全球客户提供服务。',
         address: '埃里温，亚美尼亚',
         rights: '保留所有权利。',
+      },
+      legal: {
+        terms: {
+          title: '服务条款',
+          lastUpdated: '最后更新',
+        },
+        privacy: {
+          title: '隐私政策',
+          lastUpdated: '最后更新',
+        },
+        cookies: {
+          title: 'Cookie政策',
+          lastUpdated: '最后更新',
+        },
       },
       pricing: {
         badge: 'IT维护套餐',
