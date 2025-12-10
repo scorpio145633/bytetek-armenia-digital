@@ -198,7 +198,7 @@ const Pricing = () => {
                   </CardContent>
                   <CardFooter className="relative z-10 pt-4 mt-auto">
                     <Button 
-                      className="w-full" 
+                      className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20" 
                       variant={plan.popular ? 'default' : 'outline'}
                       onClick={() => handleGetStarted(plan.name)}
                     >
