@@ -174,7 +174,7 @@ const Pricing = () => {
                     </Badge>
                   </div>
                 )}
-                <Card className={`relative h-full bg-card/50 backdrop-blur-sm border-border/50 transition-all duration-300 hover:shadow-2xl ${plan.borderGlow} ${plan.popular ? 'border-primary/50 ring-1 ring-primary/20' : ''}`}>
+                <Card className={`relative h-full flex flex-col bg-card/50 backdrop-blur-sm border-border/50 transition-all duration-300 hover:shadow-2xl ${plan.borderGlow} ${plan.popular ? 'border-primary/50 ring-1 ring-primary/20' : ''}`}>
                   <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} rounded-lg opacity-50`} />
                   <CardHeader className="relative z-10 text-center pb-2">
                     <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
@@ -182,7 +182,7 @@ const Pricing = () => {
                       {plan.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="relative z-10 text-center">
+                  <CardContent className="relative z-10 text-center flex-1">
                     <div className="mb-6">
                       <span className="text-4xl md:text-5xl font-bold text-foreground">{plan.price}</span>
                       <span className="text-muted-foreground ml-2">/{plan.period}</span>
@@ -196,7 +196,7 @@ const Pricing = () => {
                       ))}
                     </ul>
                   </CardContent>
-                  <CardFooter className="relative z-10 pt-4">
+                  <CardFooter className="relative z-10 pt-4 mt-auto">
                     <Button 
                       className="w-full" 
                       variant={plan.popular ? 'default' : 'outline'}
