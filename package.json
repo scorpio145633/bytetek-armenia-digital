@@ -1,7 +1,0 @@
-{
-  "name": "cloudflare-worker",
-  "private": true,
-  "scripts": {
-    "build": "echo \"no build needed\""
-  }
-}
